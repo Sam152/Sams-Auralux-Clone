@@ -19,23 +19,33 @@ A simple DOM based menu for start a game and possibly selecting levels.
     };
 
     Menu.prototype.createMenu = function() {
-      var display_info, menu_item, menu_items, method, self;
+      var i, item_info, menu_item, menu_items, self, _fn, _i, _len;
       self = this;
-      menu_items = {
-        startGame: {
-          label: 'Start Game'
+      menu_items = [
+        {
+          label: 'Start Game',
+          method: 'startGame'
+        }, {
+          label: 'Read Instructions',
+          method: 'showInstructions'
         }
-      };
+      ];
       this.menu_element = $('<div/>', {
         'id': 'menu'
       });
-      for (method in menu_items) {
-        display_info = menu_items[method];
-        menu_item = $('<div/>', {
-          'class': 'menu-item'
-        }).text(display_info.label).click(function() {
+      _fn = function(method) {
+        return menu_item.click(function() {
           return self[method].call(self);
+        });
+      };
+      for (i = _i = 0, _len = menu_items.length; _i < _len; i = ++_i) {
+        item_info = menu_items[i];
+        menu_item = $('<div/>', {
+          'class': "menu-item menu-item-" + i
+        }).text(item_info.label).click(function() {
+          return console.log(item_info.method);
         }).appendTo(this.menu_element);
+        _fn(item_info.method);
       }
       this.context.$body.append(this.menu_element);
       return this.menu_exists_in_dom = true;
@@ -44,6 +54,10 @@ A simple DOM based menu for start a game and possibly selecting levels.
     Menu.prototype.destroyMenu = function() {
       this.menu_element.remove();
       return this.menu_exists_in_dom = false;
+    };
+
+    Menu.prototype.showInstructions = function() {
+      return console.log('@notimplemented');
     };
 
     Menu.prototype.startGame = function() {
