@@ -6,6 +6,8 @@
       this.context = this.canvas.getContext('2d');
       this.canvas.width = this.canvas.clientWidth;
       this.canvas.height = this.canvas.clientHeight;
+      this.$document = $(document);
+      this.$body = $('body');
     }
 
     GameContext.prototype.get2d = function() {

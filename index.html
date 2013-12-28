@@ -16,6 +16,7 @@
 		<script type="text/javascript" src="bin/Ticker.js"></script>
 		<script type="text/javascript" src="bin/GameContext.js"></script>
 		<script type="text/javascript" src="lib/underscore-min.js"></script>
+		<script type="text/javascript" src="lib/jquery-1.10.2.min.js"></script>
 
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="asset/page.css" />
@@ -27,6 +28,7 @@
 	
 		<script type="text/javascript">
 			window.onload = function() {
+				$ = jQuery; // Conflict mode.
 				(new Main).start(document.getElementById('game'));
 			}
 		</script>

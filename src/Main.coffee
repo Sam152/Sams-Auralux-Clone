@@ -10,7 +10,8 @@ class window.Main
 		game = new Game(context)
 		
 		# The high level state of the game and the functions that execute them.
-		# todo, consider using coffee-machine to replace custom rolled crap.
+		# todo, consider using coffee-machine or another smarter way of handling
+		# state vs this custom junk.
 		states = {
 			IN_MENU : ->
 				menu.tick(state_controls)
