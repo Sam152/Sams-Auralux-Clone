@@ -38,8 +38,6 @@ class window.Menu
 			})
 			# Set the text.
 			.text(item_info.label)
-			# Trigger the relevant method when clicked.
-			.click(-> console.log(item_info.method))
 			# And add it to our menu.
 			.appendTo(@menu_element)
 

@@ -42,9 +42,7 @@ A simple DOM based menu for start a game and possibly selecting levels.
         item_info = menu_items[i];
         menu_item = $('<div/>', {
           'class': "menu-item menu-item-" + i
-        }).text(item_info.label).click(function() {
-          return console.log(item_info.method);
-        }).appendTo(this.menu_element);
+        }).text(item_info.label).appendTo(this.menu_element);
         _fn(item_info.method);
       }
       this.context.$body.append(this.menu_element);
