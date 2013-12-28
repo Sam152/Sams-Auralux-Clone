@@ -19,20 +19,26 @@ A simple DOM based menu for start a game and possibly selecting levels.
     };
 
     Menu.prototype.createMenu = function() {
-      var menu_items, self;
-      menu_items = [
-        {
-          label: 'Start Game',
-          callMethod: 'startGame'
-        }
-      ];
-      this.menu_element = $('<div id="menu"></div>');
-      this.context.$body.append(this.menu_element);
-      this.menu_exists_in_dom = true;
+      var display_info, menu_item, menu_items, method, self;
       self = this;
-      return this.menu_element.click(function() {
-        return self.startGame.call(self);
+      menu_items = {
+        startGame: {
+          label: 'Start Game'
+        }
+      };
+      this.menu_element = $('<div/>', {
+        'id': 'menu'
       });
+      for (method in menu_items) {
+        display_info = menu_items[method];
+        menu_item = $('<div/>', {
+          'class': 'menu-item'
+        }).text(display_info.label).click(function() {
+          return self[method].call(self);
+        }).appendTo(this.menu_element);
+      }
+      this.context.$body.append(this.menu_element);
+      return this.menu_exists_in_dom = true;
     };
 
     Menu.prototype.destroyMenu = function() {

@@ -13,22 +13,34 @@ class window.Menu
 			@createMenu()
 
 	createMenu: ->
+		self = @
 
-		menu_items = [
-			{
+		# Some menu items to render.
+		menu_items = {
+			startGame : {
 				label : 'Start Game',
-				callMethod : 'startGame'
 			}
-		]
+		}
 
-		@menu_element = $('<div id="menu"></div>')
-		
+		# Create our parent element.
+		@menu_element = $('<div/>', {'id' : 'menu'})
+
+		# For all of our menu items, keyed by the method we want to execute.
+		for method, display_info of menu_items
+			# Create a child menu item.
+			menu_item = $('<div/>', {
+				'class' : 'menu-item'
+			})
+			# Set the text.
+			.text(display_info.label)
+			# Trigger the relevant method when clicked.
+			.click(-> self[method].call(self))
+			# And add it to our menu.
+			.appendTo(@menu_element)
+
+		# Add our fully built menu to the DOM.
 		@context.$body.append(@menu_element)
 		@menu_exists_in_dom = true
-
-		# When the menu is clicked, change states.
-		self = @
-		@menu_element.click(-> self.startGame.call(self))
 
 	destroyMenu: ->
 		@menu_element.remove()

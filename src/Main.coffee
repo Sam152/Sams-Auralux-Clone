@@ -11,7 +11,7 @@ class window.Main
 		
 		# The high level state of the game and the functions that execute them.
 		# todo, consider using coffee-machine or another smarter way of handling
-		# state vs this custom junk.
+		# state vs custom rolled crap.
 		states = {
 			IN_MENU : ->
 				menu.tick(state_controls)

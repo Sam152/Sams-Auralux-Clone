@@ -1,5 +1,5 @@
 ###
-Define a way to execute a function consistently at a specific framerate.
+Define a way to execute funcitons consistently at a specific framerate.
 ###
 class window.Ticker
 	
@@ -32,7 +32,6 @@ class window.Ticker
 					self.settings.tick_function()
 					end = self.milliseconds()
 
-
 					# Find out how long the current tick took
 					tick_time = end - start
 					next_tick_ms = if tick_time > self.target_tick_time then 0 else self.target_tick_time - tick_time
@@ -44,7 +43,8 @@ class window.Ticker
 					# If we have permission to continue, do so.
 					if !self.stopped
 						execute_tick()
-				# Start the next tick when our framerate will be synced up.
+				# Start the next tick when the difference between the last tick
+				# time and the framerate has elapsed.
 				next_tick_ms
 			)
 
