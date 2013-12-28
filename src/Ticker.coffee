@@ -58,3 +58,4 @@ class window.Ticker
 
 	getTickCount: () ->
 		return @settings.count
+

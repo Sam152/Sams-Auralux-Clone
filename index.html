@@ -1,7 +1,9 @@
 <html>
 
 	<head>
-		<title></title>
+		<title>Something new</title>
+		
+		<!-- Scripts -->
 		<script type="text/javascript" src="bin/Main.js"></script>
 		<script type="text/javascript" src="bin/Game.js"></script>
 		<script type="text/javascript" src="bin/Input.js"></script>
@@ -12,14 +14,21 @@
 		<script type="text/javascript" src="bin/Universe.js"></script>
 		<script type="text/javascript" src="bin/Menu.js"></script>
 		<script type="text/javascript" src="bin/Ticker.js"></script>
+		<script type="text/javascript" src="bin/GameContext.js"></script>
 		<script type="text/javascript" src="lib/underscore-min.js"></script>
+
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="asset/page.css" />
+
 	</head>
 	<body>
 
 		<canvas id="game" />
 	
 		<script type="text/javascript">
-			(new Main).start(document.getElementById('game'));
+			window.onload = function() {
+				(new Main).start(document.getElementById('game'));
+			}
 		</script>
 
 	</body>

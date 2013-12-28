@@ -9,18 +9,30 @@ The entry point for our game.
     function Main() {}
 
     Main.prototype.start = function(canvas) {
-      var state, states, ticker;
-      this.canvas = canvas;
+      var context, game, menu, state, state_controls, states, ticker;
+      context = new GameContext(canvas);
+      menu = new Menu(context);
+      game = new Game(context);
       states = {
-        IN_MENU: function() {},
-        IN_GAME: function() {},
-        GAME_OVER: function() {}
+        IN_MENU: function() {
+          return menu.tick(state_controls);
+        },
+        IN_GAME: function() {
+          return game.tick(state_controls);
+        },
+        GAME_OVER: function() {
+          return menu.tick(state_controls);
+        }
       };
-      state = states.IN_MENU;
+      state = {
+        execute: states.IN_MENU
+      };
+      state_controls = function(change_func) {
+        return change_func(state, states);
+      };
       return ticker = new Ticker({
         tick_function: function() {
-          state();
-          return console.log('test');
+          return state.execute();
         },
         ticks_per_second: 25
       }).start();

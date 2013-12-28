@@ -1,6 +1,6 @@
 class window.Game
-	constructor: () ->
+	constructor: (@context) ->
+		console.log('Game created')
 
-	start: () ->
-		@menu = new Menu()
-
+	tick: (state_controls) ->
+		console.log('Game ticking')
