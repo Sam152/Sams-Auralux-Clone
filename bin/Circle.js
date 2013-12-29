@@ -30,6 +30,14 @@
       return ctx.get2d().stroke();
     };
 
+    Circle.prototype.intersectsWith = function(circle) {
+      return this.distanceFrom(circle) <= circle.r + this.r;
+    };
+
+    Circle.prototype.getR = function() {
+      return this.r;
+    };
+
     return Circle;
 
   })(Position);

@@ -9,6 +9,7 @@ The primary class for our overarching logic.
     function Game() {
       this.players = [];
       this.players.push(new Player());
+      _.invoke(this.players, 'createRandomPlanets', 5);
     }
 
     Game.prototype.tick = function(state_controls) {

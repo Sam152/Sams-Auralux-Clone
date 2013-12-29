@@ -9,13 +9,19 @@ A simple representation of a position.
     function Position(x, y) {
       this.x = x;
       this.y = y;
+      this.destination_position = false;
+      this.speed = 0;
     }
 
     Position.prototype.getCoords = function() {
       return {
-        x: this.x,
-        y: this.y
+        x: this.getX(),
+        y: this.getY()
       };
+    };
+
+    Position.prototype.clone = function() {
+      return new Position(this.x, this.y);
     };
 
     Position.prototype.getX = function() {
@@ -26,12 +32,66 @@ A simple representation of a position.
       return this.y;
     };
 
+    Position.prototype.multiply = function(n) {
+      this.x *= n;
+      return this.y *= n;
+    };
+
+    Position.prototype.add = function(position) {
+      this.x += position.getX();
+      return this.y += position.getY();
+    };
+
+    Position.prototype.minus = function(position) {
+      this.x -= position.getX();
+      return this.y -= position.getY();
+    };
+
     Position.prototype.distanceFrom = function(position) {
       var self;
       self = this;
       return (function(m) {
         return m.sqrt(m.pow(self.x - position.getX(), 2) + m.pow(self.y - position.getY(), 2));
       })(Math);
+    };
+
+    Position.prototype.getLength = function() {
+      var self;
+      self = this;
+      return (function(m) {
+        return m.sqrt(m.pow(self.getX(), 2) + m.pow(self.getY(), 2));
+      })(Math);
+    };
+
+    Position.prototype.getUnitVector = function() {
+      var multiplyer;
+      multiplyer = 1 / this.getLength();
+      if (multiplyer === 0) {
+        return new Position(0, 0);
+      }
+      return new Position(this.getX() * multiplyer, this.getY() * multiplyer);
+    };
+
+    Position.prototype.moveTowards = function(destination_position, speed) {
+      var destination_clone, destination_unit_vector;
+      this.destination_position = destination_position;
+      this.speed = speed;
+      if (this.destination_position === false) {
+        return;
+      }
+      if (this.distanceFrom(this.destination_position) < this.speed) {
+        this.destination_position = false;
+        return;
+      }
+      destination_clone = this.destination_position.clone();
+      destination_clone.minus(this);
+      destination_unit_vector = destination_clone.getUnitVector();
+      destination_unit_vector.multiply(this.speed);
+      return this.add(destination_unit_vector);
+    };
+
+    Position.prototype.tick = function() {
+      return this.moveTowards(this.destination_position, this.speed);
     };
 
     return Position;

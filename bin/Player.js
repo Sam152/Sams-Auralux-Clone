@@ -6,14 +6,44 @@ A player who has control over planets and units.
 
 (function() {
   window.Player = (function() {
+    Player.UNIT_GENERATION_SPEED = 10;
+
     function Player() {
       this.planets = [];
-      this.createRandomPlanets(5);
+      this.units = [];
+      this.tick_count = 0;
     }
 
-    Player.prototype.createRandomPlanets = function(number) {};
+    Player.prototype.createRandomPlanets = function(number) {
+      var i, max_radius, _i, _results;
+      max_radius = Planet.MAX_PLANET_RADIUS;
+      _results = [];
+      for (i = _i = 0; 0 <= number ? _i <= number : _i >= number; i = 0 <= number ? ++_i : --_i) {
+        _results.push(this.planets.push(new Planet(Random.integer(max_radius, window.innerWidth - max_radius), Random.integer(max_radius, window.innerHeight - max_radius), Random.integer(Planet.MIN_PLANET_RADIUS, max_radius))));
+      }
+      return _results;
+    };
 
-    Player.prototype.tick = function() {};
+    Player.prototype.tick = function() {
+      this.tick_count++;
+      _.invoke(this.planets, 'tick');
+      _.invoke(this.units, 'tick');
+      return this.generatePlanetUnits();
+    };
+
+    Player.prototype.generatePlanetUnits = function() {
+      var planet, _i, _len, _ref, _results;
+      if (this.tick_count % Player.UNIT_GENERATION_SPEED !== 0) {
+        return;
+      }
+      _ref = this.planets;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        planet = _ref[_i];
+        _results.push(this.units.push(planet.spawnUnit()));
+      }
+      return _results;
+    };
 
     return Player;
 

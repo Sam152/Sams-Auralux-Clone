@@ -21,3 +21,9 @@ class window.Circle extends Position
 		ctx.get2d().arc(@x, @y, @r, 0, Math.PI * 2); 
 		ctx.get2d().closePath();
 		ctx.get2d().stroke();
+
+	intersectsWith: (circle) ->
+		return @distanceFrom(circle) <= circle.r + @r
+
+	getR: ->
+		return @r
