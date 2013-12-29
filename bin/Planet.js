@@ -10,6 +10,10 @@ A planet that produces units.
 
     Planet.MAX_PLANET_RADIUS = 30;
 
+    Planet.UNIT_DISTANCE_FROM_PLANET = 40;
+
+    Planet.UNIT_DISTANCE_FROM_PLANET_VARIANCE = 20;
+
     function Planet(x, y, size) {
       this.position = new Circle(x, y, size);
     }
@@ -23,12 +27,13 @@ A planet that produces units.
     };
 
     Planet.prototype.spawnUnit = function() {
-      var random_offset, random_offset_destination, random_unit_vector, unit;
-      random_unit_vector = (new Position(Random.integer(-500, 500), Random.integer(-500, 500))).getUnitVector();
+      var distance_from_planet, random_offset, random_offset_destination, random_unit_vector, unit;
+      random_unit_vector = Position.randomUnitVector();
       random_offset = random_unit_vector.clone();
       random_offset.multiply(this.position.getR());
+      distance_from_planet = Planet.UNIT_DISTANCE_FROM_PLANET + Random.integer(-Planet.UNIT_DISTANCE_FROM_PLANET_VARIANCE, Planet.UNIT_DISTANCE_FROM_PLANET_VARIANCE);
       random_offset_destination = random_unit_vector.clone();
-      random_offset_destination.multiply(this.position.getR() + 20);
+      random_offset_destination.multiply(this.position.getR() + distance_from_planet);
       random_offset.add(this.position);
       random_offset_destination.add(this.position);
       unit = new Unit(random_offset.getX(), random_offset.getY());

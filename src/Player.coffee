@@ -15,13 +15,15 @@ class window.Player
 	
 	# Create a random group of planets.
 	createRandomPlanets: (number) ->
-		max_radius = Planet.MAX_PLANET_RADIUS
+
+		edge_buffer = Planet.MAX_PLANET_RADIUS + Planet.UNIT_DISTANCE_FROM_PLANET + Planet.UNIT_DISTANCE_FROM_PLANET_VARIANCE
+
 		for i in [0..number]
 			@planets.push(new Planet(
-				Random.integer(max_radius, window.innerWidth - max_radius),
-				Random.integer(max_radius, window.innerHeight - max_radius),
-				Random.integer(Planet.MIN_PLANET_RADIUS, max_radius))
-			)
+				Random.integer(edge_buffer, window.innerWidth - edge_buffer),
+				Random.integer(edge_buffer, window.innerHeight - edge_buffer),
+				Random.integer(Planet.MIN_PLANET_RADIUS, Planet.MAX_PLANET_RADIUS)
+			))
 
 	tick: ->
 		@tick_count++

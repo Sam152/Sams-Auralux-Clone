@@ -2,8 +2,8 @@
 A simple representation of a position.
 ###
 class window.Position
-	constructor: (@x, @y) ->
 
+	constructor: (@x, @y) ->
 		# As a position we can store a destination position, which will allow us
 		# to move towards that position.
 		@destination_position = false
@@ -75,3 +75,13 @@ class window.Position
 
 	tick: ->
 		@moveTowards(@destination_position, @speed)
+
+	# A static method which generates a random unit vector.
+	@randomUnitVector: ->
+		granularity = 500
+		return (
+			new Position(
+				Random.integer(-granularity, granularity),
+				Random.integer(-granularity, granularity)
+			)
+		).getUnitVector()

@@ -13,3 +13,10 @@ class window.Game
 
 	tick: (state_controls) ->
 		_.invoke(@players, 'tick')
+
+	# Check if units collide and should therefore be destroyed.
+	checkUnitCollisions: ->
+
+	# Check if units are occupying a planet enough to own it.
+	checkPlanetOwnership: ->
+

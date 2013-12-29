@@ -15,11 +15,11 @@ A player who has control over planets and units.
     }
 
     Player.prototype.createRandomPlanets = function(number) {
-      var i, max_radius, _i, _results;
-      max_radius = Planet.MAX_PLANET_RADIUS;
+      var edge_buffer, i, _i, _results;
+      edge_buffer = Planet.MAX_PLANET_RADIUS + Planet.UNIT_DISTANCE_FROM_PLANET + Planet.UNIT_DISTANCE_FROM_PLANET_VARIANCE;
       _results = [];
       for (i = _i = 0; 0 <= number ? _i <= number : _i >= number; i = 0 <= number ? ++_i : --_i) {
-        _results.push(this.planets.push(new Planet(Random.integer(max_radius, window.innerWidth - max_radius), Random.integer(max_radius, window.innerHeight - max_radius), Random.integer(Planet.MIN_PLANET_RADIUS, max_radius))));
+        _results.push(this.planets.push(new Planet(Random.integer(edge_buffer, window.innerWidth - edge_buffer), Random.integer(edge_buffer, window.innerHeight - edge_buffer), Random.integer(Planet.MIN_PLANET_RADIUS, Planet.MAX_PLANET_RADIUS))));
       }
       return _results;
     };

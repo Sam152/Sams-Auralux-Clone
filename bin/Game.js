@@ -16,6 +16,10 @@ The primary class for our overarching logic.
       return _.invoke(this.players, 'tick');
     };
 
+    Game.prototype.checkUnitCollisions = function() {};
+
+    Game.prototype.checkPlanetOwnership = function() {};
+
     return Game;
 
   })();

@@ -94,6 +94,12 @@ A simple representation of a position.
       return this.moveTowards(this.destination_position, this.speed);
     };
 
+    Position.randomUnitVector = function() {
+      var granularity;
+      granularity = 500;
+      return (new Position(Random.integer(-granularity, granularity), Random.integer(-granularity, granularity))).getUnitVector();
+    };
+
     return Position;
 
   })();
