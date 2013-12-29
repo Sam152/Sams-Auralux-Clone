@@ -2,7 +2,8 @@ class window.Circle extends Position
 	constructor: (x, y, @r) ->
 		super x, y
 
-	renderWireframe: (ctx) ->
+	renderWireframe: () ->
+		ctx = context
 		# Render the circles radius.
 		ctx.setColor('#F00')
 		ctx.setLineWidth(1)

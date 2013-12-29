@@ -2,7 +2,7 @@
 A simple DOM based menu for start a game and possibly selecting levels.
 ###
 class window.Menu
-	constructor: (@context) ->		
+	constructor: () ->		
 		@menu_exists_in_dom = false
 
 	# Since we are using the DOM (and events) to render and continue the state
@@ -50,7 +50,7 @@ class window.Menu
 			)(item_info.method)
 
 		# Add our fully built menu to the DOM.
-		@context.$body.append(@menu_element)
+		context.$body.append(@menu_element)
 		@menu_exists_in_dom = true
 
 	destroyMenu: ->

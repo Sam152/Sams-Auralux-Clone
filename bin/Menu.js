@@ -6,8 +6,7 @@ A simple DOM based menu for start a game and possibly selecting levels.
 
 (function() {
   window.Menu = (function() {
-    function Menu(context) {
-      this.context = context;
+    function Menu() {
       this.menu_exists_in_dom = false;
     }
 
@@ -46,7 +45,7 @@ A simple DOM based menu for start a game and possibly selecting levels.
         }).text(item_info.label).appendTo(this.menu_element);
         _fn(item_info.method);
       }
-      this.context.$body.append(this.menu_element);
+      context.$body.append(this.menu_element);
       return this.menu_exists_in_dom = true;
     };
 

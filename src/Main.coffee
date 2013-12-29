@@ -4,10 +4,10 @@ The entry point for our game.
 class window.Main
 	start: (canvas) ->
 
-		context = new Context(canvas);
+		window.context = new Context(canvas);
 		
-		menu = new Menu(context)
-		game = new Game(context)
+		menu = new Menu()
+		game = new Game()
 		
 		# The high level state of the game and the functions that execute them.
 		# todo, consider using coffee-machine or another smarter way of handling

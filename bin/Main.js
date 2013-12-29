@@ -9,10 +9,10 @@ The entry point for our game.
     function Main() {}
 
     Main.prototype.start = function(canvas) {
-      var context, game, menu, state, state_controls, states, ticker;
-      context = new Context(canvas);
-      menu = new Menu(context);
-      game = new Game(context);
+      var game, menu, state, state_controls, states, ticker;
+      window.context = new Context(canvas);
+      menu = new Menu();
+      game = new Game();
       states = {
         IN_MENU: function() {
           return menu.tick(state_controls);

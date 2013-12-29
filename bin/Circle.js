@@ -11,7 +11,9 @@
       Circle.__super__.constructor.call(this, x, y);
     }
 
-    Circle.prototype.renderWireframe = function(ctx) {
+    Circle.prototype.renderWireframe = function() {
+      var ctx;
+      ctx = context;
       ctx.setColor('#F00');
       ctx.setLineWidth(1);
       ctx.get2d().beginPath();
