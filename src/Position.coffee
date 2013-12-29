@@ -21,6 +21,12 @@ class window.Position
 	getY: ->
 		return @y
 
+	setX: (x) ->
+		@x = x
+
+	setY: (y) ->
+		@y = y
+
 	multiply: (n) ->
 		@x *= n
 		@y *= n

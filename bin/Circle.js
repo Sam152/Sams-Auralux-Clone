@@ -38,6 +38,10 @@
       return this.r;
     };
 
+    Circle.prototype.setR = function(r) {
+      return this.r = r;
+    };
+
     return Circle;
 
   })(Position);

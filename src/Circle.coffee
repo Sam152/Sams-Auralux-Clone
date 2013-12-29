@@ -27,3 +27,6 @@ class window.Circle extends Position
 
 	getR: ->
 		return @r
+
+	setR: (r) ->
+		@r = r

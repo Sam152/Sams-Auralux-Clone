@@ -6,14 +6,22 @@ The primary class for our overarching logic.
 
 (function() {
   window.Game = (function() {
+    Game.PLAYER_COLORS = {
+      RED: '#F00',
+      GREEN: '#0F0',
+      BLUE: '#00F'
+    };
+
     function Game() {
       this.players = [];
-      this.players.push(new Player());
+      this.players.push(new Player(Game.PLAYER_COLORS.BLUE));
       _.invoke(this.players, 'createRandomPlanets', 5);
+      this.cursor = new Cursor();
     }
 
     Game.prototype.tick = function(state_controls) {
-      return _.invoke(this.players, 'tick');
+      _.invoke(this.players, 'tick');
+      return this.cursor.tick();
     };
 
     Game.prototype.checkUnitCollisions = function() {};

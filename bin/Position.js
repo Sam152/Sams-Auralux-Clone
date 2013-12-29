@@ -32,6 +32,14 @@ A simple representation of a position.
       return this.y;
     };
 
+    Position.prototype.setX = function(x) {
+      return this.x = x;
+    };
+
+    Position.prototype.setY = function(y) {
+      return this.y = y;
+    };
+
     Position.prototype.multiply = function(n) {
       this.x *= n;
       return this.y *= n;

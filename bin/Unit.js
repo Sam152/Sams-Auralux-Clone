@@ -3,8 +3,10 @@
   window.Unit = (function() {
     Unit.UNIT_SPEED = 1;
 
+    Unit.UNIT_WIDTH = 5;
+
     function Unit(x, y) {
-      this.position = new Circle(x, y, 2);
+      this.position = new Circle(x, y, Unit.UNIT_WIDTH);
     }
 
     Unit.prototype.setDestination = function(point) {
