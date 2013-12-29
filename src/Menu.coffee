@@ -11,6 +11,8 @@ class window.Menu
 	tick: (@state_controls) ->		
 		if @menu_exists_in_dom == false
 			@createMenu()
+			# Remove this to enable the menu
+			@startGame()
 
 	createMenu: ->
 		self = @

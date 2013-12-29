@@ -4,7 +4,7 @@ The entry point for our game.
 class window.Main
 	start: (canvas) ->
 
-		context = new GameContext(canvas);
+		context = new Context(canvas);
 		
 		menu = new Menu(context)
 		game = new Game(context)
@@ -29,6 +29,8 @@ class window.Main
 		# Start a ticker at 30fps.
 		ticker = new Ticker({
 			tick_function: () ->
+				context.clearScreen()
 				state.execute()
 			ticks_per_second : 25
 		}).start()
+		
