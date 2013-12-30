@@ -7,7 +7,7 @@ units being added to the same collection.
 
 (function() {
   window.UnitCollection = (function() {
-    UnitCollection.SEND_TO_SPREAD_AMOUNT = 10;
+    UnitCollection.SEND_TO_SPREAD_AMOUNT = 20;
 
     function UnitCollection() {
       this.units = {};

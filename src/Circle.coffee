@@ -4,6 +4,14 @@ class window.Circle extends Position
 
 	renderWireframe: () ->
 		ctx = context
+		# Draw the actual circle.
+		ctx.get2d().beginPath();
+		ctx.get2d().fillStyle = 'rgba(0,0,0,0.05)'
+		ctx.get2d().strokeStyle = '#00F'
+		ctx.get2d().arc(@x, @y, @r, 0, Math.PI * 2); 
+		ctx.get2d().closePath();
+		ctx.get2d().fill();
+		ctx.get2d().stroke();
 		# Render the circles radius.
 		ctx.setColor('#F00')
 		ctx.setLineWidth(1)
@@ -14,13 +22,7 @@ class window.Circle extends Position
 		# Render a point for the center.
 		ctx.setColor('#070')
 		ctx.get2d().fillRect(@x - 1.5, @y - 1.5, 3, 3)
-		# Draw the actual circle.
-		ctx.get2d().beginPath();
-		ctx.get2d().fillStyle = 'transparent'
-		ctx.get2d().strokeStyle = '#00F'
-		ctx.get2d().arc(@x, @y, @r, 0, Math.PI * 2); 
-		ctx.get2d().closePath();
-		ctx.get2d().stroke();
+
 
 	intersectsWith: (circle) ->
 		return @distanceFrom(circle) <= circle.r + @r

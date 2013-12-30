@@ -4,7 +4,7 @@ units being added to the same collection.
 ###
 class window.UnitCollection
 
-	@SEND_TO_SPREAD_AMOUNT: 10
+	@SEND_TO_SPREAD_AMOUNT: 20
 
 	constructor: ->
 		@units = {}

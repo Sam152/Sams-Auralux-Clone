@@ -14,6 +14,13 @@
     Circle.prototype.renderWireframe = function() {
       var ctx;
       ctx = context;
+      ctx.get2d().beginPath();
+      ctx.get2d().fillStyle = 'rgba(0,0,0,0.05)';
+      ctx.get2d().strokeStyle = '#00F';
+      ctx.get2d().arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.get2d().closePath();
+      ctx.get2d().fill();
+      ctx.get2d().stroke();
       ctx.setColor('#F00');
       ctx.setLineWidth(1);
       ctx.get2d().beginPath();
@@ -21,13 +28,7 @@
       ctx.get2d().lineTo(this.x + this.r, this.y);
       ctx.get2d().stroke();
       ctx.setColor('#070');
-      ctx.get2d().fillRect(this.x - 1.5, this.y - 1.5, 3, 3);
-      ctx.get2d().beginPath();
-      ctx.get2d().fillStyle = 'transparent';
-      ctx.get2d().strokeStyle = '#00F';
-      ctx.get2d().arc(this.x, this.y, this.r, 0, Math.PI * 2);
-      ctx.get2d().closePath();
-      return ctx.get2d().stroke();
+      return ctx.get2d().fillRect(this.x - 1.5, this.y - 1.5, 3, 3);
     };
 
     Circle.prototype.intersectsWith = function(circle) {

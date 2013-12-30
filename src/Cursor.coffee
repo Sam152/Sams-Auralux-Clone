@@ -8,14 +8,14 @@ class window.Cursor
 
 	# The bounds of our selection radius.
 	@MAX_SELECTION_RADIUS: 300
-	@MIN_SELECTION_RADIUS: 50
+	@MIN_SELECTION_RADIUS: 80
 
 	# How much delta a mouse needs to be scrolling before a direction is registered.
 	@SCROLL_SENSITIVITY: 1
 
 	constructor: (@player) ->
 		self = @
-		@selection_radius = 50
+		@selection_radius = Cursor.MIN_SELECTION_RADIUS
 
 		@position = new Circle(-100, -100, @selection_radius)
 

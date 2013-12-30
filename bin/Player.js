@@ -20,7 +20,7 @@ A player who has control over planets and units.
       edge_buffer = Planet.MAX_PLANET_RADIUS + Planet.UNIT_DISTANCE_FROM_PLANET + Planet.UNIT_DISTANCE_FROM_PLANET_VARIANCE;
       _results = [];
       for (i = _i = 0; 0 <= number ? _i <= number : _i >= number; i = 0 <= number ? ++_i : --_i) {
-        _results.push(this.planets.push(new Planet(Random.integer(edge_buffer, window.innerWidth - edge_buffer), Random.integer(edge_buffer, window.innerHeight - edge_buffer), Random.integer(Planet.MIN_PLANET_RADIUS, Planet.MAX_PLANET_RADIUS))));
+        _results.push(this.planets.push(new Planet(Random.integer(edge_buffer, window.innerWidth - edge_buffer), Random.integer(edge_buffer, window.innerHeight - edge_buffer), Random.integer(Planet.MIN_PLANET_RADIUS, Planet.MAX_PLANET_RADIUS), this.color)));
       }
       return _results;
     };
@@ -29,7 +29,8 @@ A player who has control over planets and units.
       this.tick_count++;
       _.invoke(this.planets, 'tick');
       this.units.tickAll();
-      return this.generatePlanetUnits();
+      this.generatePlanetUnits();
+      return this.drawPlanets();
     };
 
     Player.prototype.generatePlanetUnits = function() {
@@ -42,6 +43,28 @@ A player who has control over planets and units.
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         planet = _ref[_i];
         _results.push(this.units.add(planet.spawnUnit()));
+      }
+      return _results;
+    };
+
+    Player.prototype.drawPlanets = function() {
+      var ctx, planet, pos, _i, _len, _ref, _results;
+      _ref = this.planets;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        planet = _ref[_i];
+        pos = planet.getPosition();
+        ctx = context.get2d();
+        ctx.save();
+        ctx.globalAlpha = 0.5;
+        ctx.beginPath();
+        ctx.fillStyle = this.color.hex;
+        ctx.strokeStyle = '#00F';
+        ctx.arc(pos.getX(), pos.getY(), pos.getR(), 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        _results.push(ctx.restore());
       }
       return _results;
     };

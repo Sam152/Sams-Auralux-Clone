@@ -10,7 +10,7 @@ Allow people to provide input into the game-space via a cursor.
 
     Cursor.MAX_SELECTION_RADIUS = 300;
 
-    Cursor.MIN_SELECTION_RADIUS = 50;
+    Cursor.MIN_SELECTION_RADIUS = 80;
 
     Cursor.SCROLL_SENSITIVITY = 1;
 
@@ -18,7 +18,7 @@ Allow people to provide input into the game-space via a cursor.
       var self;
       this.player = player;
       self = this;
-      this.selection_radius = 50;
+      this.selection_radius = Cursor.MIN_SELECTION_RADIUS;
       this.position = new Circle(-100, -100, this.selection_radius);
       Input.captureMousewheel(this.handleScroll, this);
       Input.captureMousemove(this.handleMove, this);

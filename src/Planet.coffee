@@ -8,16 +8,15 @@ class window.Planet
 	@MAX_PLANET_RADIUS: 30
 
 	# The distance a unit falls from the planet.
-	@UNIT_DISTANCE_FROM_PLANET: 10
+	@UNIT_DISTANCE_FROM_PLANET: 20
 
 	# The variance of how far a unit falls from a planet
-	@UNIT_DISTANCE_FROM_PLANET_VARIANCE: 20
+	@UNIT_DISTANCE_FROM_PLANET_VARIANCE: 10
 
-	constructor: (x, y, size) ->
+	constructor: (x, y, size, @color) ->
 		@position = new Circle(x, y, size)
 
 	tick: ->
-		@position.renderWireframe()
 
 	getPosition: ->
 		return @position
@@ -29,7 +28,6 @@ class window.Planet
 
 		# Make it the size of the planet.
 		random_offset = random_unit_vector.clone()
-		random_offset.multiply(@position.getR())
 
 		distance_from_planet = Planet.UNIT_DISTANCE_FROM_PLANET + Random.integer(-Planet.UNIT_DISTANCE_FROM_PLANET_VARIANCE, Planet.UNIT_DISTANCE_FROM_PLANET_VARIANCE)
 
@@ -40,7 +38,7 @@ class window.Planet
 		random_offset.add(@position)
 		random_offset_destination.add(@position)
 
-		unit = new Unit(random_offset.getX(), random_offset.getY())
+		unit = new Unit(random_offset.getX(), random_offset.getY(), @color)
 		unit.setDestination(random_offset_destination)
 
 		return unit
