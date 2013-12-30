@@ -4,7 +4,7 @@ A player who has control over planets and units.
 class window.Player
 
 	# How fast should units spawn.
-	@UNIT_GENERATION_SPEED: 5
+	@UNIT_GENERATION_SPEED: 1
 
 	constructor: (@color) ->
 		# The planets this player currently controls.

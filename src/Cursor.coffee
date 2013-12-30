@@ -66,8 +66,8 @@ class window.Cursor
 			@selected_units.setActive(true)
 
 		clear_selection = ->
-			@selected_units.clearAll()
 			@selected_units.setActive(false)
+			@selected_units.clearAll()
 
 		Input.captureMouseDown( (event) ->
 			# If we have right clicked, we are commanding units.

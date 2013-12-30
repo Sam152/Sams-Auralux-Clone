@@ -25,11 +25,13 @@ Specific commands could be overriden by parent elements.
     };
 
     UnitCollection.prototype.getAll = function() {
-      var unit_array;
+      var key, unit, unit_array, _ref;
       unit_array = [];
-      $.each(this.units, function(i, unit) {
-        return unit_array.push(unit);
-      });
+      _ref = this.units;
+      for (key in _ref) {
+        unit = _ref[key];
+        unit_array.push(unit);
+      }
       return unit_array;
     };
 
@@ -46,21 +48,29 @@ Specific commands could be overriden by parent elements.
     };
 
     UnitCollection.prototype.sendTo = function(position) {
-      var self;
+      var move_to, self, unit, _i, _len, _ref, _results;
       position = position.clone();
       self = this;
-      return $.each(this.getAll(), function(i, unit) {
-        var move_to;
+      _ref = this.getAll();
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        unit = _ref[_i];
         move_to = position.clone();
         move_to.add(new Position(Random.integer(-UnitCollection.SEND_TO_SPREAD_AMOUNT, UnitCollection.SEND_TO_SPREAD_AMOUNT), Random.integer(-UnitCollection.SEND_TO_SPREAD_AMOUNT, UnitCollection.SEND_TO_SPREAD_AMOUNT)));
-        return unit.setDestination(move_to);
-      });
+        _results.push(unit.setDestination(move_to));
+      }
+      return _results;
     };
 
     UnitCollection.prototype.tickAll = function() {
-      return $.each(this.getAll(), function(i, unit) {
-        return unit.tick();
-      });
+      var unit, _i, _len, _ref, _results;
+      _ref = this.getAll();
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        unit = _ref[_i];
+        _results.push(unit.tick());
+      }
+      return _results;
     };
 
     UnitCollection.prototype.setActive = function(status) {

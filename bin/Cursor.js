@@ -67,8 +67,8 @@ Allow people to provide input into the game-space via a cursor.
         return this.selected_units.setActive(true);
       };
       clear_selection = function() {
-        this.selected_units.clearAll();
-        return this.selected_units.setActive(false);
+        this.selected_units.setActive(false);
+        return this.selected_units.clearAll();
       };
       Input.captureMouseDown(function(event) {
         if (event.button === 2) {

@@ -24,9 +24,8 @@ class window.UnitCollection
 	# Get all of the units in an array format.
 	getAll: ->
 		unit_array = []
-		$.each(@units, (i, unit) ->
+		for key, unit of @units
 			unit_array.push(unit)
-		)
 		return unit_array
 
 	# Get the unique key that identifies a unit.
@@ -44,7 +43,8 @@ class window.UnitCollection
 	sendTo: (position) ->
 		position = position.clone()
 		self = @
-		$.each(@getAll(), (i, unit) ->
+		
+		for unit in @getAll()
 
 			move_to = position.clone()
 			move_to.add(
@@ -55,12 +55,10 @@ class window.UnitCollection
 			)
 
 			unit.setDestination(move_to)
-		)
 
 	tickAll: ->
-		$.each(@getAll(), (i, unit) ->
+		for unit in @getAll()
 			unit.tick()
-		)
 
 	# Set a group of units as being active or inactive.
 	setActive: (status) ->
