@@ -5,4 +5,4 @@ This is a "clone" is a game called Auralux avaiable for Windows, Android and iOS
 
 Demo
 ----
-You can see the progress <a href="https://github.com/Sam152/Sams-Auralux-Clone">here</a>.
+You can see the progress <a href="http://sam152.github.io/Sams-Auralux-Clone/">here</a>.
