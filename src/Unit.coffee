@@ -2,6 +2,9 @@ class window.Unit
 
 	@UNIT_SPEED: 7
 	@UNIT_WIDTH: 5
+
+	# A global counter for units, so that every unit may have a uid. This
+	# assists in the UnitCollection class.
 	@UNIT_COUNTER: 0
 
 	constructor: (x, y, @color) ->

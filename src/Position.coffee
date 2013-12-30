@@ -1,5 +1,9 @@
 ###
-A simple representation of a position.
+A simple representation of a position. Every point stored in the game is
+represented by a Position. 
+
+@param [Integer] x The x component of a position.
+@param [Integer] x The y component of a position.
 ###
 class window.Position
 
