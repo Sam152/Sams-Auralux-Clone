@@ -10,11 +10,7 @@ class window.Ownership
 
 		# Run expensive operations infrequently.
 		Schedule.runEvery(Ownership.OWNERSHIP_CHECK_FREQUENCY, ->
-
-			for player in players
-				
-
-
-
-
-		, @)
+			Collisions.playerMatchup(players, (player, compare_player) -> 
+				console.log('a')
+			,@)
+		,@)

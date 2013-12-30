@@ -1,0 +1,7 @@
+--name       "Auralux"
+--readme     README.md
+--title      "Codo Documentation"
+--private
+--quiet
+--output     ./doc
+./src

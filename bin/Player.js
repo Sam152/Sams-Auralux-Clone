@@ -49,6 +49,10 @@ A player who has control over planets and units.
       return this.units;
     };
 
+    Player.prototype.getPlanets = function() {
+      return this.planets;
+    };
+
     return Player;
 
   })();

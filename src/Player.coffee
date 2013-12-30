@@ -46,3 +46,6 @@ class window.Player
 
 	getUnits: ->
 		return @units
+
+	getPlanets: ->
+		return @planets

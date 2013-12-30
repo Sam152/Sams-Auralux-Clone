@@ -12,13 +12,9 @@ Manage who owns what.
 
     Ownership.checkPlanetOwnership = function(players, neutral_player) {
       return Schedule.runEvery(Ownership.OWNERSHIP_CHECK_FREQUENCY, function() {
-        var player, _i, _len, _results;
-        _results = [];
-        for (_i = 0, _len = players.length; _i < _len; _i++) {
-          player = players[_i];
-          _results.push(console.log(player));
-        }
-        return _results;
+        return Collisions.playerMatchup(players, function(player, compare_player) {
+          return console.log('a');
+        }, this);
       }, this);
     };
 

@@ -12,24 +12,20 @@ Handle collisions and conflicts between units.
 
     Collisions.UNIT_COLLISION_SENSITIVITY = 40;
 
-    Collisions.resolveCollisions = function(combat_players) {
-      var compare_player, inner_checked, matchup_number, outer_checked, player, _i, _len, _results;
-      matchup_number = 0;
+    Collisions.playerMatchup = function(players, func, self) {
+      var compare_player, inner_checked, outer_checked, player, _i, _len, _results;
       _results = [];
-      for (outer_checked = _i = 0, _len = combat_players.length; _i < _len; outer_checked = ++_i) {
-        player = combat_players[outer_checked];
+      for (outer_checked = _i = 0, _len = players.length; _i < _len; outer_checked = ++_i) {
+        player = players[outer_checked];
         _results.push((function() {
           var _j, _len1, _results1;
           _results1 = [];
-          for (inner_checked = _j = 0, _len1 = combat_players.length; _j < _len1; inner_checked = ++_j) {
-            compare_player = combat_players[inner_checked];
+          for (inner_checked = _j = 0, _len1 = players.length; _j < _len1; inner_checked = ++_j) {
+            compare_player = players[inner_checked];
             if (compare_player === player || outer_checked > inner_checked) {
               continue;
             }
-            if (ticks % Collisions.COLLISION_CHECKING_SCHEDULE === matchup_number) {
-              Collisions.compareUnits(player, compare_player);
-            }
-            _results1.push(matchup_number++);
+            _results1.push(func.call(self, player, compare_player));
           }
           return _results1;
         })());
@@ -37,10 +33,22 @@ Handle collisions and conflicts between units.
       return _results;
     };
 
-    Collisions.compareUnits = function(player, compare_player) {
-      var compare_to_units, compare_unit, inner_unit_checked, outer_unit_checked, unit, units, _i, _len, _ref, _results;
-      compare_to_units = compare_player.getUnits();
-      units = player.getUnits();
+    Collisions.resolveCollisions = function(combat_players) {
+      var matchup_number;
+      matchup_number = 0;
+      return Collisions.playerMatchup(combat_players, function(player, compare_player) {
+        var compare_to_units, units;
+        if (ticks % Collisions.COLLISION_CHECKING_SCHEDULE === matchup_number) {
+          compare_to_units = compare_player.getUnits();
+          units = player.getUnits();
+          Collisions.compareUnits(units, compare_to_units);
+        }
+        return matchup_number++;
+      }, this);
+    };
+
+    Collisions.compareUnits = function(units, compare_to_units) {
+      var compare_unit, inner_unit_checked, outer_unit_checked, unit, _i, _len, _ref, _results;
       _ref = units.getAll();
       _results = [];
       for (outer_unit_checked = _i = 0, _len = _ref.length; _i < _len; outer_unit_checked = ++_i) {

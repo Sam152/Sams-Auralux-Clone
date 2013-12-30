@@ -11,31 +11,41 @@ class window.Collisions
 	# units colliding easily.
 	@UNIT_COLLISION_SENSITIVITY: 40
 
-	# Resolve colliding units between an array of players.
-	@resolveCollisions: (combat_players) ->
-		
-		matchup_number = 0
-		for player, outer_checked in combat_players
-			for compare_player, inner_checked in combat_players
+	# Take an array of players and vs them against eachother by calling the
+	# passed func. This ensures that each player is only matched up once. This
+	# may need a better place to live.
+	@playerMatchup: (players, func, self) ->
+		for player, outer_checked in players
+			for compare_player, inner_checked in players
 				# Ensure we only check each player against eachother once.
 				if compare_player == player || outer_checked > inner_checked
 					continue
 
-				# Instead of using Schedule, we can stagger the collision
-				# detection per player matchup in order to put less stress on
-				# a specific tick.
-				if ticks % Collisions.COLLISION_CHECKING_SCHEDULE == matchup_number
-					# Check the units of the two players we have elected to compare.
-					Collisions.compareUnits(player, compare_player)
+				func.call(self, player, compare_player)
 
-				matchup_number++
+
+	# Resolve colliding units between an array of players.
+	@resolveCollisions: (combat_players) ->
+		
+		matchup_number = 0
+
+		Collisions.playerMatchup(combat_players, (player, compare_player) ->
+			# Instead of using Schedule, we can stagger the collision
+			# detection per player matchup in order to put less stress on
+			# a specific tick.
+			if ticks % Collisions.COLLISION_CHECKING_SCHEDULE == matchup_number
+
+				compare_to_units = compare_player.getUnits()
+				units = player.getUnits()
+				# Check the units of the two players we have elected to compare.
+				Collisions.compareUnits(units, compare_to_units)
+
+			matchup_number++
+		, @)
 
 
 	# Compare the units provided by two players.
-	@compareUnits: (player, compare_player) ->
-
-		compare_to_units = compare_player.getUnits()
-		units = player.getUnits()
+	@compareUnits: (units, compare_to_units) ->
 
 		# Compare each units position with each other unit.
 		for unit, outer_unit_checked in units.getAll()
