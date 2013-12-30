@@ -6,13 +6,13 @@ class window.Player
 	# How fast should units spawn.
 	@UNIT_GENERATION_SPEED: 10
 
-	constructor: () ->
+	constructor: (@color) ->
 		# The planets this player currently controls.
 		@planets = []
 		# The units this player has control over.
-		@units = []
+		@units = new UnitCollection()
 		@tick_count = 0
-	
+
 	# Create a random group of planets.
 	createRandomPlanets: (number) ->
 
@@ -30,7 +30,7 @@ class window.Player
 		
 		# Ensure our planets and units are ticked.
 		_.invoke(@planets, 'tick')
-		_.invoke(@units, 'tick')
+		@units.tickAll()
 		
 		# Ensure units are created when required.
 		@generatePlanetUnits()
@@ -42,4 +42,7 @@ class window.Player
 			return
 
 		for planet in @planets
-			@units.push(planet.spawnUnit())
+			@units.add(planet.spawnUnit())
+
+	getUnits: ->
+		return @units

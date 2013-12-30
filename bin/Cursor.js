@@ -6,27 +6,23 @@ Allow people to provide input into the game-space via a cursor.
 
 (function() {
   window.Cursor = (function() {
-    Cursor.SELECTION_RADIUS_CHANGE_SPEED = 15;
+    Cursor.SELECTION_RADIUS_CHANGE_SPEED = 3;
 
     Cursor.MAX_SELECTION_RADIUS = 300;
 
     Cursor.MIN_SELECTION_RADIUS = 50;
 
-    Cursor.SCROLL_SENSITIVITY = 3;
+    Cursor.SCROLL_SENSITIVITY = 1;
 
-    function Cursor() {
+    function Cursor(player) {
       var self;
+      this.player = player;
       self = this;
       this.selection_radius = 50;
-      this.position = new Circle(-100, -100, Cursor.MIN_SELECTION_RADIUS);
-      context.canvas.addEventListener('mousewheel', function(event) {
-        self.handleScroll.call(self, event);
-        event.preventDefault();
-        return false;
-      }, false);
-      context.canvas.addEventListener('mousemove', function(event) {
-        return self.handleMove.call(self, event);
-      }, false);
+      this.position = new Circle(-100, -100, this.selection_radius);
+      Input.captureMousewheel(this.handleScroll, this);
+      Input.captureMousemove(this.handleMove, this);
+      this.handleUnitControls();
     }
 
     Cursor.prototype.handleScroll = function(e) {
@@ -48,8 +44,43 @@ Allow people to provide input into the game-space via a cursor.
       return this.position.setR(this.selection_radius);
     };
 
+    Cursor.prototype.getPosition = function() {
+      return this.position;
+    };
+
     Cursor.prototype.tick = function() {
       return this.position.renderWireframe();
+    };
+
+    Cursor.prototype.handleUnitControls = function() {
+      var collect_units;
+      this.selected_units = new UnitCollection();
+      collect_units = function() {
+        var unit, _i, _len, _ref, _results;
+        _ref = this.player.getUnits().getAll();
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          unit = _ref[_i];
+          if (unit.getPosition().intersectsWith(this.getPosition())) {
+            _results.push(this.selected_units.add(unit));
+          } else {
+            _results.push(void 0);
+          }
+        }
+        return _results;
+      };
+      Input.captureMouseDown(function(event) {
+        if (event.button === 2) {
+          this.selected_units.sendTo(this.position);
+          return this.selected_units.clearAll();
+        } else {
+          this.selected_units.clearAll();
+          return collect_units.call(this);
+        }
+      }, this);
+      return Input.captureDrag(function() {
+        return collect_units.call(this);
+      }, this);
     };
 
     return Cursor;

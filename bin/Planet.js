@@ -10,7 +10,7 @@ A planet that produces units.
 
     Planet.MAX_PLANET_RADIUS = 30;
 
-    Planet.UNIT_DISTANCE_FROM_PLANET = 40;
+    Planet.UNIT_DISTANCE_FROM_PLANET = 10;
 
     Planet.UNIT_DISTANCE_FROM_PLANET_VARIANCE = 20;
 

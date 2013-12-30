@@ -8,7 +8,7 @@ class window.Planet
 	@MAX_PLANET_RADIUS: 30
 
 	# The distance a unit falls from the planet.
-	@UNIT_DISTANCE_FROM_PLANET: 40
+	@UNIT_DISTANCE_FROM_PLANET: 10
 
 	# The variance of how far a unit falls from a planet
 	@UNIT_DISTANCE_FROM_PLANET_VARIANCE: 20

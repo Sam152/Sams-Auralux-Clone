@@ -4,33 +4,26 @@ Allow people to provide input into the game-space via a cursor.
 class window.Cursor
 
 	# The speed at which the selection radius changes.
-	@SELECTION_RADIUS_CHANGE_SPEED: 15
+	@SELECTION_RADIUS_CHANGE_SPEED: 3
 
 	# The bounds of our selection radius.
 	@MAX_SELECTION_RADIUS: 300
 	@MIN_SELECTION_RADIUS: 50
 
 	# How much delta a mouse needs to be scrolling before a direction is registered.
-	@SCROLL_SENSITIVITY: 3
+	@SCROLL_SENSITIVITY: 1
 
-	constructor: ->
+	constructor: (@player) ->
 		self = @
 		@selection_radius = 50
 
-		@position = new Circle(-100, -100, Cursor.MIN_SELECTION_RADIUS)
+		@position = new Circle(-100, -100, @selection_radius)
 
-		# Attach to mouse wheel movements.
-		context.canvas.addEventListener('mousewheel', (event) ->
-    		self.handleScroll.call(self, event)
-    		# Prevent "over-scroll" on webkit devices.
-    		event.preventDefault()
-    		return false
-		, false)
+		# Move to this system of capturing inut.
+		Input.captureMousewheel(@handleScroll, @)
+		Input.captureMousemove(@handleMove, @)
 
-		# Attach to mouse movements.
-		context.canvas.addEventListener('mousemove', (event) ->
-			self.handleMove.call(self, event)
-		, false)
+		@handleUnitControls()
 
 	# Handle scroll events passed to the space.
 	handleScroll: (e) ->
@@ -52,5 +45,41 @@ class window.Cursor
 		@selection_radius = radius
 		@position.setR(@selection_radius)
 
+	getPosition: ->
+		return @position
+
 	tick: ->
 		@position.renderWireframe()
+
+
+	# Allow drag selection of units.
+	handleUnitControls: ->
+
+		@selected_units = new UnitCollection()
+
+		# Gather all of the units that intersect with the cursor and add them to
+		# a unit collection.
+		collect_units = ->
+			for unit in @player.getUnits().getAll()
+				if unit.getPosition().intersectsWith(@getPosition())
+					@selected_units.add(unit)
+
+		Input.captureMouseDown( (event) ->
+			# If we have right clicked, we are commanding units.
+			if event.button == 2
+				# Send them to the position they were instructed.
+				@selected_units.sendTo(@position)
+				# And de-select them.
+				@selected_units.clearAll()
+			else
+				# If we are left clicking, clear our old selection and collect
+				# a new one.
+				@selected_units.clearAll()
+				collect_units.call(@)
+		, @)
+
+		# While dragging ensure we are collecting units.
+		Input.captureDrag(->
+			collect_units.call(@)
+		, @)
+

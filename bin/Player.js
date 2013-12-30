@@ -8,9 +8,10 @@ A player who has control over planets and units.
   window.Player = (function() {
     Player.UNIT_GENERATION_SPEED = 10;
 
-    function Player() {
+    function Player(color) {
+      this.color = color;
       this.planets = [];
-      this.units = [];
+      this.units = new UnitCollection();
       this.tick_count = 0;
     }
 
@@ -27,7 +28,7 @@ A player who has control over planets and units.
     Player.prototype.tick = function() {
       this.tick_count++;
       _.invoke(this.planets, 'tick');
-      _.invoke(this.units, 'tick');
+      this.units.tickAll();
       return this.generatePlanetUnits();
     };
 
@@ -40,9 +41,13 @@ A player who has control over planets and units.
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         planet = _ref[_i];
-        _results.push(this.units.push(planet.spawnUnit()));
+        _results.push(this.units.add(planet.spawnUnit()));
       }
       return _results;
+    };
+
+    Player.prototype.getUnits = function() {
+      return this.units;
     };
 
     return Player;
