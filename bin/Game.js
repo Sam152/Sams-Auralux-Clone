@@ -21,20 +21,6 @@ The primary class for our overarching logic.
       }
     };
 
-    Game.UNIT_COLLISION_SENSITIVITY = 40;
-
-    Game.prototype.setupGameplay = function() {
-      var green_player, neutral_player, red_player;
-      neutral_player = new NeutralPlayer(Game.PLAYER_COLORS.BLACK);
-      this.human_player = new Player(Game.PLAYER_COLORS.BLUE);
-      red_player = new Player(Game.PLAYER_COLORS.RED);
-      green_player = new Player(Game.PLAYER_COLORS.GREEN);
-      this.players = [neutral_player, red_player, green_player, this.human_player];
-      this.combat_players = [red_player, this.human_player, green_player];
-      _.invoke(this.combat_players, 'createRandomPlanets', 0);
-      return neutral_player.createRandomPlanets(5);
-    };
-
     function Game() {
       this.setupGameplay();
       this.cursor = new Cursor(this.human_player);
@@ -43,10 +29,17 @@ The primary class for our overarching logic.
     Game.prototype.tick = function(state_controls) {
       _.invoke(this.players, 'tick');
       this.cursor.tick();
-      return Collisions.resolveCollisions(this.combat_players);
+      Collisions.resolveCollisions(this.combat_players);
+      return Ownership.checkPlanetOwnership(this.players, this.neutral_player);
     };
 
-    Game.prototype.checkPlanetOwnership = function() {};
+    Game.prototype.setupGameplay = function() {
+      this.human_player;
+      this.neutral_player;
+      this.combat_players;
+      this.players;
+      throw Error('Game mode should override Game::setupGameplay.');
+    };
 
     return Game;
 

@@ -12,8 +12,3 @@ class window.AI
 		runEvery(100, ->
 			@numberOfUnits = 100
 		)
-
-	# Run functions every x ticks.
-	runEvery: (x, func) ->
-		if x % ticks == 0
-			func()

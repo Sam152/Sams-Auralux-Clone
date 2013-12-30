@@ -10,6 +10,8 @@ Handle collisions and conflicts between units.
 
     Collisions.COLLISION_CHECKING_SCHEDULE = 6;
 
+    Collisions.UNIT_COLLISION_SENSITIVITY = 40;
+
     Collisions.resolveCollisions = function(combat_players) {
       var compare_player, inner_checked, matchup_number, outer_checked, player, _i, _len, _results;
       matchup_number = 0;
@@ -49,7 +51,7 @@ Handle collisions and conflicts between units.
           _results1 = [];
           for (inner_unit_checked = _j = 0, _len1 = _ref1.length; _j < _len1; inner_unit_checked = ++_j) {
             compare_unit = _ref1[inner_unit_checked];
-            if (unit.getPosition().distanceFrom(compare_unit.getPosition()) < Game.UNIT_COLLISION_SENSITIVITY) {
+            if (unit.getPosition().distanceFrom(compare_unit.getPosition()) < Collisions.UNIT_COLLISION_SENSITIVITY) {
               units.remove(unit);
               compare_to_units.remove(compare_unit);
               break;

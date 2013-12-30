@@ -16,12 +16,6 @@ Some behaviour for the player to play against.
       });
     };
 
-    AI.prototype.runEvery = function(x, func) {
-      if (x % ticks === 0) {
-        return func();
-      }
-    };
-
     return AI;
 
   })();

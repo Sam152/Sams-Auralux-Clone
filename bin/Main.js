@@ -13,7 +13,7 @@ The entry point for our game.
       window.context = new Context(canvas);
       window.ticks = 0;
       menu = new Menu();
-      game = new Game();
+      game = new RandomGame();
       states = {
         IN_MENU: function() {
           return menu.tick(state_controls);
