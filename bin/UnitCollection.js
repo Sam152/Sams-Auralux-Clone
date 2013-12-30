@@ -2,6 +2,9 @@
 /*
 A way of storing collections of units. Prevents simple things like duplicate
 units being added to the same collection.
+@todo, perhaps investigate a generic collection which applies methods in bulk
+to sub items instead of manually writing collections to pass through commands.
+Specific commands could be overriden by parent elements.
 */
 
 
@@ -58,6 +61,17 @@ units being added to the same collection.
       return $.each(this.getAll(), function(i, unit) {
         return unit.tick();
       });
+    };
+
+    UnitCollection.prototype.setActive = function(status) {
+      var unit, _i, _len, _ref, _results;
+      _ref = this.getAll();
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        unit = _ref[_i];
+        _results.push(unit.setActive(status));
+      }
+      return _results;
     };
 
     return UnitCollection;

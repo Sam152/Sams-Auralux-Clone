@@ -6,13 +6,12 @@ A player who has control over planets and units.
 
 (function() {
   window.Player = (function() {
-    Player.UNIT_GENERATION_SPEED = 10;
+    Player.UNIT_GENERATION_SPEED = 5;
 
     function Player(color) {
       this.color = color;
       this.planets = [];
       this.units = new UnitCollection();
-      this.tick_count = 0;
     }
 
     Player.prototype.createRandomPlanets = function(number) {
@@ -26,16 +25,15 @@ A player who has control over planets and units.
     };
 
     Player.prototype.tick = function() {
-      this.tick_count++;
       _.invoke(this.planets, 'tick');
       this.units.tickAll();
       this.generatePlanetUnits();
-      return this.drawPlanets();
+      return _.invoke(this.planets, 'drawPlanet');
     };
 
     Player.prototype.generatePlanetUnits = function() {
       var planet, _i, _len, _ref, _results;
-      if (this.tick_count % Player.UNIT_GENERATION_SPEED !== 0) {
+      if (ticks % Player.UNIT_GENERATION_SPEED !== 0) {
         return;
       }
       _ref = this.planets;
@@ -43,28 +41,6 @@ A player who has control over planets and units.
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         planet = _ref[_i];
         _results.push(this.units.add(planet.spawnUnit()));
-      }
-      return _results;
-    };
-
-    Player.prototype.drawPlanets = function() {
-      var ctx, planet, pos, _i, _len, _ref, _results;
-      _ref = this.planets;
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        planet = _ref[_i];
-        pos = planet.getPosition();
-        ctx = context.get2d();
-        ctx.save();
-        ctx.globalAlpha = 0.5;
-        ctx.beginPath();
-        ctx.fillStyle = this.color.hex;
-        ctx.strokeStyle = '#00F';
-        ctx.arc(pos.getX(), pos.getY(), pos.getR(), 0, Math.PI * 2);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
-        _results.push(ctx.restore());
       }
       return _results;
     };

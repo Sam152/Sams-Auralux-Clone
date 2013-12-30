@@ -6,7 +6,7 @@ Allow people to provide input into the game-space via a cursor.
 
 (function() {
   window.Cursor = (function() {
-    Cursor.SELECTION_RADIUS_CHANGE_SPEED = 3;
+    Cursor.SELECTION_RADIUS_CHANGE_SPEED = 50;
 
     Cursor.MAX_SELECTION_RADIUS = 300;
 
@@ -53,28 +53,28 @@ Allow people to provide input into the game-space via a cursor.
     };
 
     Cursor.prototype.handleUnitControls = function() {
-      var collect_units;
+      var clear_selection, collect_units;
       this.selected_units = new UnitCollection();
       collect_units = function() {
-        var unit, _i, _len, _ref, _results;
+        var unit, _i, _len, _ref;
         _ref = this.player.getUnits().getAll();
-        _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           unit = _ref[_i];
           if (unit.getPosition().intersectsWith(this.getPosition())) {
-            _results.push(this.selected_units.add(unit));
-          } else {
-            _results.push(void 0);
+            this.selected_units.add(unit);
           }
         }
-        return _results;
+        return this.selected_units.setActive(true);
+      };
+      clear_selection = function() {
+        this.selected_units.clearAll();
+        return this.selected_units.setActive(false);
       };
       Input.captureMouseDown(function(event) {
         if (event.button === 2) {
-          this.selected_units.sendTo(this.position);
-          return this.selected_units.clearAll();
+          return this.selected_units.sendTo(this.position);
         } else {
-          this.selected_units.clearAll();
+          clear_selection.call(this);
           return collect_units.call(this);
         }
       }, this);

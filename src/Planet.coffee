@@ -8,7 +8,7 @@ class window.Planet
 	@MAX_PLANET_RADIUS: 30
 
 	# The distance a unit falls from the planet.
-	@UNIT_DISTANCE_FROM_PLANET: 20
+	@UNIT_DISTANCE_FROM_PLANET: 25
 
 	# The variance of how far a unit falls from a planet
 	@UNIT_DISTANCE_FROM_PLANET_VARIANCE: 10
@@ -42,3 +42,18 @@ class window.Planet
 		unit.setDestination(random_offset_destination)
 
 		return unit
+
+	drawPlanet: ->
+		pos = @getPosition()
+		ctx = context.get2d()
+		ctx.save()
+		ctx.globalAlpha = 0.6
+		ctx.beginPath();
+		ctx.fillStyle = @color.hex
+		ctx.strokeStyle = '#000'
+		ctx.strokeStyle = '#000'
+		ctx.arc(pos.getX(), pos.getY(), pos.getR(), 0, Math.PI * 2)
+		ctx.closePath()
+		ctx.fill()
+		ctx.stroke()
+		ctx.restore()

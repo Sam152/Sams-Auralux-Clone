@@ -10,6 +10,15 @@ body{
 	font-family:'Open Sans', sans-serif;
 }
 
+*{
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
 
 canvas{
 	width:100%;
@@ -20,13 +29,15 @@ canvas{
 
 #menu{
 	position: absolute;
-	width:400px;
-	margin-left:-200px;
-	left:50%;
-	top:200px;
-	background:#DDD;
-	border:1px solid #AAA;
-	border-radius:4px;
+	background: #DDD;
+	border: 1px solid #AAA;
+	border-radius: 4px;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	text-align: center;
+	padding-top: 170px;
 }
 
 #menu .menu-item{

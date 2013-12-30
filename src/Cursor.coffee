@@ -4,7 +4,7 @@ Allow people to provide input into the game-space via a cursor.
 class window.Cursor
 
 	# The speed at which the selection radius changes.
-	@SELECTION_RADIUS_CHANGE_SPEED: 3
+	@SELECTION_RADIUS_CHANGE_SPEED: 50
 
 	# The bounds of our selection radius.
 	@MAX_SELECTION_RADIUS: 300
@@ -63,18 +63,22 @@ class window.Cursor
 			for unit in @player.getUnits().getAll()
 				if unit.getPosition().intersectsWith(@getPosition())
 					@selected_units.add(unit)
+			@selected_units.setActive(true)
+
+		clear_selection = ->
+			@selected_units.clearAll()
+			@selected_units.setActive(false)
 
 		Input.captureMouseDown( (event) ->
 			# If we have right clicked, we are commanding units.
 			if event.button == 2
 				# Send them to the position they were instructed.
 				@selected_units.sendTo(@position)
-				# And de-select them.
-				@selected_units.clearAll()
+				# clear_selection.call(@)
 			else
 				# If we are left clicking, clear our old selection and collect
 				# a new one.
-				@selected_units.clearAll()
+				clear_selection.call(@)
 				collect_units.call(@)
 		, @)
 

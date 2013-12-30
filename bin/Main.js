@@ -11,6 +11,7 @@ The entry point for our game.
     Main.prototype.start = function(canvas) {
       var game, menu, state, state_controls, states, ticker;
       window.context = new Context(canvas);
+      window.ticks = 0;
       menu = new Menu();
       game = new Game();
       states = {
@@ -33,7 +34,8 @@ The entry point for our game.
       return ticker = new Ticker({
         tick_function: function() {
           context.clearScreen();
-          return state.execute();
+          state.execute();
+          return window.ticks++;
         },
         ticks_per_second: 25
       }).start();

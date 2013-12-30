@@ -14,23 +14,25 @@ The primary class for our overarching logic.
         hex: '#0F0'
       },
       BLUE: {
-        hex: '#00F'
+        hex: '#0a7eaa'
       },
       BLACK: {
-        hex: '#000'
+        hex: '#999'
       }
     };
 
-    Game.UNIT_COLLISION_SENSITIVITY = 20;
+    Game.UNIT_COLLISION_SENSITIVITY = 40;
 
     Game.prototype.setupGameplay = function() {
-      var another_player, neutral_player;
+      var green_player, neutral_player, red_player;
       neutral_player = new NeutralPlayer(Game.PLAYER_COLORS.BLACK);
-      another_player = new Player(Game.PLAYER_COLORS.RED);
       this.human_player = new Player(Game.PLAYER_COLORS.BLUE);
-      this.players = [neutral_player, another_player, this.human_player];
-      this.combat_players = [another_player, this.human_player];
-      return _.invoke(this.players, 'createRandomPlanets', 0);
+      red_player = new Player(Game.PLAYER_COLORS.RED);
+      green_player = new Player(Game.PLAYER_COLORS.GREEN);
+      this.players = [neutral_player, red_player, green_player, this.human_player];
+      this.combat_players = [red_player, this.human_player, green_player];
+      _.invoke(this.combat_players, 'createRandomPlanets', 0);
+      return neutral_player.createRandomPlanets(5);
     };
 
     function Game() {
@@ -41,57 +43,7 @@ The primary class for our overarching logic.
     Game.prototype.tick = function(state_controls) {
       _.invoke(this.players, 'tick');
       this.cursor.tick();
-      return this.checkUnitCollisions();
-    };
-
-    Game.prototype.checkUnitCollisions = function() {
-      var collision_found, compare_player, compare_to_units, compare_unit, inner_checked, inner_unit_checked, outer_checked, outer_unit_checked, player, unit, units, _i, _len, _ref, _results;
-      collision_found = false;
-      _ref = this.combat_players;
-      _results = [];
-      for (outer_checked = _i = 0, _len = _ref.length; _i < _len; outer_checked = ++_i) {
-        player = _ref[outer_checked];
-        _results.push((function() {
-          var _j, _len1, _ref1, _results1;
-          _ref1 = this.combat_players;
-          _results1 = [];
-          for (inner_checked = _j = 0, _len1 = _ref1.length; _j < _len1; inner_checked = ++_j) {
-            compare_player = _ref1[inner_checked];
-            if (compare_player === player || outer_checked > inner_checked) {
-              continue;
-            }
-            compare_to_units = compare_player.getUnits();
-            units = player.getUnits();
-            _results1.push((function() {
-              var _k, _len2, _ref2, _results2;
-              _ref2 = units.getAll();
-              _results2 = [];
-              for (outer_unit_checked = _k = 0, _len2 = _ref2.length; _k < _len2; outer_unit_checked = ++_k) {
-                unit = _ref2[outer_unit_checked];
-                _results2.push((function() {
-                  var _l, _len3, _ref3, _results3;
-                  _ref3 = compare_to_units.getAll();
-                  _results3 = [];
-                  for (inner_unit_checked = _l = 0, _len3 = _ref3.length; _l < _len3; inner_unit_checked = ++_l) {
-                    compare_unit = _ref3[inner_unit_checked];
-                    if (unit.getPosition().distanceFrom(compare_unit.getPosition()) < Game.UNIT_COLLISION_SENSITIVITY) {
-                      units.remove(unit);
-                      compare_to_units.remove(compare_unit);
-                      break;
-                    } else {
-                      _results3.push(void 0);
-                    }
-                  }
-                  return _results3;
-                })());
-              }
-              return _results2;
-            })());
-          }
-          return _results1;
-        }).call(this));
-      }
-      return _results;
+      return Collisions.resolveCollisions(this.combat_players);
     };
 
     Game.prototype.checkPlanetOwnership = function() {};

@@ -5,6 +5,7 @@ class window.Main
 	start: (canvas) ->
 
 		window.context = new Context(canvas);
+		window.ticks = 0
 		
 		menu = new Menu()
 		game = new Game()
@@ -31,6 +32,7 @@ class window.Main
 			tick_function: () ->
 				context.clearScreen()
 				state.execute()
+				window.ticks++
 			ticks_per_second : 25
 		}).start()
 		

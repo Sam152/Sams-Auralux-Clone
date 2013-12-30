@@ -10,7 +10,7 @@ A planet that produces units.
 
     Planet.MAX_PLANET_RADIUS = 30;
 
-    Planet.UNIT_DISTANCE_FROM_PLANET = 20;
+    Planet.UNIT_DISTANCE_FROM_PLANET = 25;
 
     Planet.UNIT_DISTANCE_FROM_PLANET_VARIANCE = 10;
 
@@ -37,6 +37,23 @@ A planet that produces units.
       unit = new Unit(random_offset.getX(), random_offset.getY(), this.color);
       unit.setDestination(random_offset_destination);
       return unit;
+    };
+
+    Planet.prototype.drawPlanet = function() {
+      var ctx, pos;
+      pos = this.getPosition();
+      ctx = context.get2d();
+      ctx.save();
+      ctx.globalAlpha = 0.6;
+      ctx.beginPath();
+      ctx.fillStyle = this.color.hex;
+      ctx.strokeStyle = '#000';
+      ctx.strokeStyle = '#000';
+      ctx.arc(pos.getX(), pos.getY(), pos.getR(), 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      return ctx.restore();
     };
 
     return Planet;
