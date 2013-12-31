@@ -35,6 +35,10 @@ Specific commands could be overriden by parent elements.
       return unit_array;
     };
 
+    UnitCollection.prototype.count = function() {
+      return this.getAll().length;
+    };
+
     UnitCollection.prototype.getObjectKey = function(unit) {
       return "id-" + (unit.getId());
     };

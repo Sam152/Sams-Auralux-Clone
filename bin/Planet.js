@@ -6,9 +6,9 @@ A planet that produces units.
 
 (function() {
   window.Planet = (function() {
-    Planet.MIN_PLANET_RADIUS = 10;
+    Planet.MIN_PLANET_RADIUS = 20;
 
-    Planet.MAX_PLANET_RADIUS = 30;
+    Planet.MAX_PLANET_RADIUS = 40;
 
     Planet.UNIT_DISTANCE_FROM_PLANET = 25;
 

@@ -4,8 +4,8 @@ A planet that produces units.
 class window.Planet
 
 	# The bounds for how big a randomly generated planet can be.
-	@MIN_PLANET_RADIUS: 10
-	@MAX_PLANET_RADIUS: 30
+	@MIN_PLANET_RADIUS: 20
+	@MAX_PLANET_RADIUS: 40
 
 	# The distance a unit falls from the planet.
 	@UNIT_DISTANCE_FROM_PLANET: 25

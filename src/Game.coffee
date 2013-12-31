@@ -8,7 +8,7 @@ class window.Game
 			hex: '#F00',
 		},
 		GREEN : {
-			hex : '#0F0'
+			hex : '#0F0',
 		},
 		BLUE : {
 			hex :'#0a7eaa',
@@ -18,12 +18,11 @@ class window.Game
 		},
 	}
 
-
-
 	# Setup the container for the main gameplay.
 	constructor: () ->
 		# This can be overriden to create different game modes.
 		@setupGameplay()
+		@createAI()
 
 		# Create a cursor to control the human player.
 		@cursor = new Cursor(@human_player)
@@ -32,6 +31,7 @@ class window.Game
 	tick: (state_controls) ->
 		# Tick the required components.
 		_.invoke(@players, 'tick')
+		_.invoke(@ai, 'tick')
 		@cursor.tick()
 
 		# Do the primary game related logic.
@@ -47,4 +47,13 @@ class window.Game
 		@neutral_player
 		@combat_players
 		@players
-		throw Error('Game mode should override Game::setupGameplay.')
+		throw new Error('Game mode should override Game::setupGameplay.')
+
+	# Create AI objects for the computer players.
+	createAI: () ->
+		@ai = []
+		for player in @combat_players when player != @human_player
+			other_players = []
+			for other_player in @players when other_player != player
+				other_players.push(other_player)
+			@ai.push(new AI(player, other_players, @neutral_player))

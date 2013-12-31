@@ -28,6 +28,10 @@ class window.UnitCollection
 			unit_array.push(unit)
 		return unit_array
 
+	# Get how many units are currently in our collection.
+	count: ->
+		return @getAll().length
+
 	# Get the unique key that identifies a unit.
 	getObjectKey: (unit) ->
 		return "id-#{unit.getId()}"
