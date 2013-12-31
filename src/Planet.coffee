@@ -21,6 +21,12 @@ class window.Planet
 	getPosition: ->
 		return @position
 
+	getColor: ->
+		return @color
+
+	setColor: (color) ->
+		@color = color
+
 	# Create a new unit which is positioned outside of the planet.
 	spawnUnit: ->
 		# Generate a unit vector in a random direction.

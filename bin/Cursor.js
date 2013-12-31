@@ -8,7 +8,7 @@ Allow people to provide input into the game-space via a cursor.
   window.Cursor = (function() {
     Cursor.SELECTION_RADIUS_CHANGE_SPEED = 50;
 
-    Cursor.MAX_SELECTION_RADIUS = 300;
+    Cursor.MAX_SELECTION_RADIUS = 500;
 
     Cursor.MIN_SELECTION_RADIUS = 80;
 

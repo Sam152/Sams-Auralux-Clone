@@ -7,7 +7,7 @@ class window.Cursor
 	@SELECTION_RADIUS_CHANGE_SPEED: 50
 
 	# The bounds of our selection radius.
-	@MAX_SELECTION_RADIUS: 300
+	@MAX_SELECTION_RADIUS: 500
 	@MIN_SELECTION_RADIUS: 80
 
 	# How much delta a mouse needs to be scrolling before a direction is registered.

@@ -10,13 +10,55 @@ Manage who owns what.
 
     Ownership.OWNERSHIP_CHECK_FREQUENCY = 20;
 
+    Ownership.UNIT_COVERAGE_REQUIREMENT = 30;
+
     Ownership.checkPlanetOwnership = function(players, neutral_player) {
       return Schedule.runEvery(Ownership.OWNERSHIP_CHECK_FREQUENCY, function() {
         return Collisions.playerMatchup(players, function(player, compare_player) {
-          var opponents_units;
-          return opponents_units = compare_player.getUnits();
+          var occupying_units, opponents_units, planet, unit, _i, _len, _ref, _results;
+          if (compare_player === neutral_player) {
+            return;
+          }
+          opponents_units = compare_player.getUnits();
+          _ref = player.getPlanets();
+          _results = [];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            planet = _ref[_i];
+            occupying_units = [];
+            _results.push((function() {
+              var _j, _len1, _ref1, _results1;
+              _ref1 = opponents_units.getAll();
+              _results1 = [];
+              for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+                unit = _ref1[_j];
+                if (unit.getPosition().intersectsWith(planet.getPosition())) {
+                  occupying_units.push(unit);
+                  if (occupying_units.length > Ownership.UNIT_COVERAGE_REQUIREMENT) {
+                    Ownership.transferOwnership(planet, occupying_units, compare_player, player);
+                    break;
+                  } else {
+                    _results1.push(void 0);
+                  }
+                } else {
+                  _results1.push(void 0);
+                }
+              }
+              return _results1;
+            })());
+          }
+          return _results;
         }, this);
       }, this);
+    };
+
+    Ownership.transferOwnership = function(planet, units, player, old_player) {
+      var unit, _i, _len;
+      for (_i = 0, _len = units.length; _i < _len; _i++) {
+        unit = units[_i];
+        player.getUnits().remove(unit);
+      }
+      player.addPlanetOwnership(planet);
+      return old_player.removePlanetOwnership(planet);
     };
 
     return Ownership;

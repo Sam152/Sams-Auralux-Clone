@@ -25,6 +25,14 @@ A planet that produces units.
       return this.position;
     };
 
+    Planet.prototype.getColor = function() {
+      return this.color;
+    };
+
+    Planet.prototype.setColor = function(color) {
+      return this.color = color;
+    };
+
     Planet.prototype.spawnUnit = function() {
       var distance_from_planet, random_offset, random_offset_destination, random_unit_vector, unit;
       random_unit_vector = Position.randomUnitVector();

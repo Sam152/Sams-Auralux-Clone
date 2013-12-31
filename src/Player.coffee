@@ -27,7 +27,6 @@ class window.Player
 			))
 
 	tick: ->
-		
 		# Ensure our planets and units are ticked.
 		_.invoke(@planets, 'tick')
 		@units.tickAll()
@@ -49,3 +48,22 @@ class window.Player
 
 	getPlanets: ->
 		return @planets
+
+	getColor: ->
+		return @color
+
+	# Tell this player that a planet no longer belongs to them.
+	removePlanetOwnership: (planet) ->
+		for planet_candidate, i in @planets
+			if planet_candidate == planet
+				delete @planets[i]
+				@planets = @planets.filter( (n) -> return n)
+				break
+
+	# Bring a new planet into the circle of trust. Pay special attention to what
+	# happens in the constructor of Planet, because this function needs to
+	# replicate a lot of the player specific setup logic.
+	addPlanetOwnership: (planet) ->
+		planet.setColor(@getColor())
+		@planets.push(planet)
+

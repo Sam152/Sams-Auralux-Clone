@@ -53,6 +53,34 @@ A player who has control over planets and units.
       return this.planets;
     };
 
+    Player.prototype.getColor = function() {
+      return this.color;
+    };
+
+    Player.prototype.removePlanetOwnership = function(planet) {
+      var i, planet_candidate, _i, _len, _ref, _results;
+      _ref = this.planets;
+      _results = [];
+      for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+        planet_candidate = _ref[i];
+        if (planet_candidate === planet) {
+          delete this.planets[i];
+          this.planets = this.planets.filter(function(n) {
+            return n;
+          });
+          break;
+        } else {
+          _results.push(void 0);
+        }
+      }
+      return _results;
+    };
+
+    Player.prototype.addPlanetOwnership = function(planet) {
+      planet.setColor(this.getColor());
+      return this.planets.push(planet);
+    };
+
     return Player;
 
   })();
