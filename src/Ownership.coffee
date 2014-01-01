@@ -14,37 +14,40 @@ class window.Ownership
 
 		# Run expensive operations infrequently.
 		Schedule.runEvery(Ownership.OWNERSHIP_CHECK_FREQUENCY, ->
-			Collisions.playerMatchup(players, (player, compare_player) -> 
+			for player in players
+				for compare_player in players
 
-				# No need to check if the neutral players units are concouring
-				# the world.
-				if compare_player == neutral_player
-					return
+					# No need to check if the neutral players units are concouring
+					# the world.
+					if compare_player == neutral_player || player == compare_player
+						continue
 
-				# Get the units we will be testing.
-				opponents_units = compare_player.getUnits()
+					# Get the units we will be testing.
+					opponents_units = compare_player.getUnits()
 
-				# Test each planet of the player we are testing.
-				for planet in player.getPlanets()
-					
-					occupying_units = []
+					if player.color.hex == Game.PLAYER_COLORS.BLUE
+						console.log('Checking human planets against '  + compare_player.color.hex)
 
-					# Check each unit of opponent player.
-					for unit in opponents_units.getAll()
+					# Test each planet of the player we are testing.
+					for planet in player.getPlanets()
+						
+						occupying_units = []
 
-						# If they intersect with the planet, they are a
-						# candidate to take the planet over.
-						if unit.getPosition().intersectsWith(planet.getPosition())
-							occupying_units.push(unit)
+						# Check each unit of opponent player.
+						for unit in opponents_units.getAll()
 
-							# If we find there are enoguh units, transfer the
-							# ownership of the planet and move on to the next
-							# one
-							if occupying_units.length > Ownership.UNIT_COVERAGE_REQUIREMENT
-								Ownership.transferOwnership(planet, occupying_units, compare_player, player)
-								break
+							# If they intersect with the planet, they are a
+							# candidate to take the planet over.
+							if unit.getPosition().intersectsWith(planet.getPosition())
+								occupying_units.push(unit)
 
-			,@)
+								# If we find there are enoguh units, transfer the
+								# ownership of the planet and move on to the next
+								# one
+								if occupying_units.length > Ownership.UNIT_COVERAGE_REQUIREMENT
+									Ownership.transferOwnership(planet, occupying_units, compare_player, player)
+									break
+
 		,@)
 
 	# Move the ownership of a planet from one person to another.

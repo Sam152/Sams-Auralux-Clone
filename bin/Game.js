@@ -8,16 +8,20 @@ The primary class for our overarching logic.
   window.Game = (function() {
     Game.PLAYER_COLORS = {
       RED: {
-        hex: '#F00'
+        hex: '#F00',
+        label: 'red'
       },
       GREEN: {
-        hex: '#0F0'
+        hex: '#0F0',
+        label: 'green'
       },
       BLUE: {
-        hex: '#0a7eaa'
+        hex: '#0a7eaa',
+        label: 'blue'
       },
       BLACK: {
-        hex: '#999'
+        hex: '#999',
+        label: 'black'
       }
     };
 

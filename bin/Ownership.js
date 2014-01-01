@@ -14,40 +14,57 @@ Manage who owns what.
 
     Ownership.checkPlanetOwnership = function(players, neutral_player) {
       return Schedule.runEvery(Ownership.OWNERSHIP_CHECK_FREQUENCY, function() {
-        return Collisions.playerMatchup(players, function(player, compare_player) {
-          var occupying_units, opponents_units, planet, unit, _i, _len, _ref, _results;
-          if (compare_player === neutral_player) {
-            return;
-          }
-          opponents_units = compare_player.getUnits();
-          _ref = player.getPlanets();
-          _results = [];
-          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            planet = _ref[_i];
-            occupying_units = [];
-            _results.push((function() {
-              var _j, _len1, _ref1, _results1;
-              _ref1 = opponents_units.getAll();
-              _results1 = [];
-              for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-                unit = _ref1[_j];
-                if (unit.getPosition().intersectsWith(planet.getPosition())) {
-                  occupying_units.push(unit);
-                  if (occupying_units.length > Ownership.UNIT_COVERAGE_REQUIREMENT) {
-                    Ownership.transferOwnership(planet, occupying_units, compare_player, player);
-                    break;
-                  } else {
-                    _results1.push(void 0);
-                  }
-                } else {
-                  _results1.push(void 0);
-                }
+        var compare_player, occupying_units, opponents_units, planet, player, unit, _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = players.length; _i < _len; _i++) {
+          player = players[_i];
+          _results.push((function() {
+            var _j, _len1, _results1;
+            _results1 = [];
+            for (_j = 0, _len1 = players.length; _j < _len1; _j++) {
+              compare_player = players[_j];
+              if (compare_player === neutral_player || player === compare_player) {
+                continue;
               }
-              return _results1;
-            })());
-          }
-          return _results;
-        }, this);
+              opponents_units = compare_player.getUnits();
+              if (player.color.hex === Game.PLAYER_COLORS.BLUE) {
+                console.log('Checking human planets against ' + compare_player.color.hex);
+              }
+              _results1.push((function() {
+                var _k, _len2, _ref, _results2;
+                _ref = player.getPlanets();
+                _results2 = [];
+                for (_k = 0, _len2 = _ref.length; _k < _len2; _k++) {
+                  planet = _ref[_k];
+                  occupying_units = [];
+                  _results2.push((function() {
+                    var _l, _len3, _ref1, _results3;
+                    _ref1 = opponents_units.getAll();
+                    _results3 = [];
+                    for (_l = 0, _len3 = _ref1.length; _l < _len3; _l++) {
+                      unit = _ref1[_l];
+                      if (unit.getPosition().intersectsWith(planet.getPosition())) {
+                        occupying_units.push(unit);
+                        if (occupying_units.length > Ownership.UNIT_COVERAGE_REQUIREMENT) {
+                          Ownership.transferOwnership(planet, occupying_units, compare_player, player);
+                          break;
+                        } else {
+                          _results3.push(void 0);
+                        }
+                      } else {
+                        _results3.push(void 0);
+                      }
+                    }
+                    return _results3;
+                  })());
+                }
+                return _results2;
+              })());
+            }
+            return _results1;
+          })());
+        }
+        return _results;
       }, this);
     };
 

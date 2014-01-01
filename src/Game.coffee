@@ -6,15 +6,19 @@ class window.Game
 	@PLAYER_COLORS: {
 		RED : {
 			hex: '#F00',
+			label: 'red',
 		},
 		GREEN : {
 			hex : '#0F0',
+			label: 'green',
 		},
 		BLUE : {
 			hex :'#0a7eaa',
+			label: 'blue',
 		},
 		BLACK : {
 			hex : '#999',
+			label : 'black',
 		},
 	}
 
