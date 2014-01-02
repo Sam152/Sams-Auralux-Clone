@@ -18,15 +18,15 @@ Create a completely random game.
     }
 
     AIGame.prototype.setupGameplay = function() {
-      var blue_player, green_player, orange_player, red_player;
+      var blue_player, green_player, purple_player, red_player;
       this.neutral_player = new NeutralPlayer(Game.PLAYER_COLORS.BLACK);
       this.human_player = new Player(Game.PLAYER_COLORS.BLUE);
       red_player = new Player(Game.PLAYER_COLORS.RED);
       green_player = new Player(Game.PLAYER_COLORS.GREEN);
-      orange_player = new Player(Game.PLAYER_COLORS.ORANGE);
+      purple_player = new Player(Game.PLAYER_COLORS.PURPLE);
       blue_player = new Player(Game.PLAYER_COLORS.BLUE);
-      this.players = [this.neutral_player, red_player, green_player, blue_player, orange_player];
-      this.combat_players = [red_player, green_player, blue_player, orange_player];
+      this.players = [this.neutral_player, red_player, green_player, blue_player, purple_player];
+      this.combat_players = [red_player, green_player, blue_player, purple_player];
       _.invoke(this.combat_players, 'createRandomPlanets', 0);
       return this.neutral_player.createRandomPlanets(20);
     };

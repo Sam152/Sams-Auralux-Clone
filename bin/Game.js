@@ -19,9 +19,9 @@ The primary class for our overarching logic.
         hex: '#0a7eaa',
         label: 'blue'
       },
-      ORANGE: {
+      PURPLE: {
         hex: '#707',
-        label: 'orange'
+        label: 'purple'
       },
       BLACK: {
         hex: '#999',

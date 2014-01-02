@@ -11,7 +11,7 @@ class window.Main
 
 		# @todo, Instead of creating a game directly, we could move to a game selection
 		# screen instead here.
-		game = new AIGame()
+		game = new RandomGame()
 		
 		# The high level state of the game and the functions that execute them.
 		# todo, consider using coffee-machine or another smarter way of handling

@@ -9,17 +9,24 @@ class window.RandomGame extends Game
 		@human_player = new Player(Game.PLAYER_COLORS.BLUE)
 		red_player = new Player(Game.PLAYER_COLORS.RED)
 		green_player = new Player(Game.PLAYER_COLORS.GREEN)
+		purple_player = new Player(Game.PLAYER_COLORS.PURPLE)
 
 		@players = [
 			@neutral_player,
 			red_player,
 			green_player,
-			@human_player
+			@human_player,
+			purple_player,
 		]
-		@combat_players = [red_player, @human_player, green_player]
+		@combat_players = [
+			red_player,
+			@human_player,
+			green_player,
+			purple_player,
+		]
 
 		# Create some randomly laid out planets for each of the players.
 		_.invoke(@combat_players, 'createRandomPlanets', 0)
 
 		# Set a few random neutral planets.
-		@neutral_player.createRandomPlanets(5)
+		@neutral_player.createRandomPlanets(@combat_players.length * 3)

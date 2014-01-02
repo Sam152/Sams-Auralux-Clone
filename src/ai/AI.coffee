@@ -7,7 +7,7 @@ class window.AI
 
 		# Some stats related to how often our AI should do certain things.
 		@defence = 20
-		@attack = 50
+		@attack = 100
 		@expand = 20
 
 		# Get some general stats about the player to use.
@@ -151,10 +151,6 @@ class window.AI
 			victim = planet.nearest_occupied
 
 			if false == victim.planet
-				continue
-
-			# Try to stop all the planets from attacking at exactly the same time.
-			if (Random.integer(0, @planets.length) == 0)
 				continue
 
 			total_defence = @getNearbyUnits(victim.planet, victim.player).count()

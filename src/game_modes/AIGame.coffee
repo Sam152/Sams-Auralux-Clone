@@ -10,7 +10,7 @@ class window.AIGame extends Game
 		
 		red_player = new Player(Game.PLAYER_COLORS.RED)
 		green_player = new Player(Game.PLAYER_COLORS.GREEN)
-		orange_player = new Player(Game.PLAYER_COLORS.ORANGE)
+		purple_player = new Player(Game.PLAYER_COLORS.PURPLE)
 		blue_player = new Player(Game.PLAYER_COLORS.BLUE)
 
 		@players = [
@@ -18,14 +18,14 @@ class window.AIGame extends Game
 			red_player,
 			green_player,
 			blue_player,
-			orange_player,
+			purple_player,
 		]
 
 		@combat_players = [
 			red_player,
 			green_player,
 			blue_player,
-			orange_player,
+			purple_player,
 		]
 
 		# Create some randomly laid out planets for each of the players.

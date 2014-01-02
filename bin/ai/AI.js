@@ -11,7 +11,7 @@ Some behaviour for the player to play against.
       this.other_players = other_players;
       this.neutral_player = neutral_player;
       this.defence = 20;
-      this.attack = 50;
+      this.attack = 100;
       this.expand = 20;
       this.updateGeneralStats();
       this.updatePlanetStats();
@@ -147,9 +147,6 @@ Some behaviour for the player to play against.
         planet = _ref[_i];
         victim = planet.nearest_occupied;
         if (false === victim.planet) {
-          continue;
-        }
-        if (Random.integer(0, this.planets.length) === 0) {
           continue;
         }
         total_defence = this.getNearbyUnits(victim.planet, victim.player).count();
