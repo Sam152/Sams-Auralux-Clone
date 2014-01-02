@@ -33,6 +33,14 @@ A container for some DOM elements and the 2d context.
       return this.canvas;
     };
 
+    Context.prototype.getHeight = function() {
+      return this.canvas.height;
+    };
+
+    Context.prototype.getWidth = function() {
+      return this.canvas.width;
+    };
+
     Context.prototype.setColor = function(color) {
       this.get2d().fillStyle = color;
       return this.get2d().strokeStyle = color;

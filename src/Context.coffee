@@ -29,6 +29,12 @@ class window.Context
 	getCanvas: ->
 		return @canvas
 
+	getHeight: ->
+		return @canvas.height
+		
+	getWidth: ->
+		return @canvas.width
+
 	setColor: (color) ->
 		@get2d().fillStyle = color
 		@get2d().strokeStyle = color
