@@ -3,8 +3,13 @@ Handle collisions and conflicts between units.
 ###
 class window.Collisions
 
-	# How often (based on ticks) collisions should be checked/
-	@COLLISION_CHECKING_SCHEDULE: 6
+	# How often (based on ticks) collisions should be checked for player
+	# matchups. This could be replaced with something that works out the
+	# combinations of players because ultimately that is the optimal number.
+	@PLAYER_COLLISION_CHECKING_SCHEDULE: 6
+
+	# How many ticks to split unit checking into.
+	@UNIT_COLLISION_CHECKING_SCHEDULE: 5
 
 	# How close should units be before they collide. Until/unless some sort
 	# of "attraction" is implemented, this needs to be set quite high to keep
@@ -26,14 +31,12 @@ class window.Collisions
 
 	# Resolve colliding units between an array of players.
 	@resolveCollisions: (combat_players) ->
-		
 		matchup_number = 0
-
 		Collisions.playerMatchup(combat_players, (player, compare_player) ->
 			# Instead of using Schedule, we can stagger the collision
 			# detection per player matchup in order to put less stress on
 			# a specific tick.
-			if ticks % Collisions.COLLISION_CHECKING_SCHEDULE == matchup_number
+			if ticks % Collisions.PLAYER_COLLISION_CHECKING_SCHEDULE == matchup_number || matchup_number > Collisions.PLAYER_COLLISION_CHECKING_SCHEDULE
 
 				compare_to_units = compare_player.getUnits()
 				units = player.getUnits()
@@ -48,8 +51,8 @@ class window.Collisions
 	@compareUnits: (units, compare_to_units) ->
 
 		# Compare each units position with each other unit.
-		for unit, outer_unit_checked in units.getAll()
-			for compare_unit, inner_unit_checked in compare_to_units.getAll()
+		for unit, outer_checked in units.getAll()
+			for compare_unit, inner_checked in compare_to_units.getAll()
 
 				# When we consider there a collision between some units.
 				if unit.getPosition().distanceFrom(compare_unit.getPosition()) < Collisions.UNIT_COLLISION_SENSITIVITY

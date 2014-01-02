@@ -24,6 +24,9 @@ class window.Unit
 		@position.tick()
 		@drawUnit()
 
+	getId: ->
+		return @id
+
 	setActive: (status) ->
 		@active = status
 

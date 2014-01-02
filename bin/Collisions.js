@@ -8,7 +8,9 @@ Handle collisions and conflicts between units.
   window.Collisions = (function() {
     function Collisions() {}
 
-    Collisions.COLLISION_CHECKING_SCHEDULE = 6;
+    Collisions.PLAYER_COLLISION_CHECKING_SCHEDULE = 6;
+
+    Collisions.UNIT_COLLISION_CHECKING_SCHEDULE = 5;
 
     Collisions.UNIT_COLLISION_SENSITIVITY = 40;
 
@@ -38,7 +40,7 @@ Handle collisions and conflicts between units.
       matchup_number = 0;
       return Collisions.playerMatchup(combat_players, function(player, compare_player) {
         var compare_to_units, units;
-        if (ticks % Collisions.COLLISION_CHECKING_SCHEDULE === matchup_number) {
+        if (ticks % Collisions.PLAYER_COLLISION_CHECKING_SCHEDULE === matchup_number || matchup_number > Collisions.PLAYER_COLLISION_CHECKING_SCHEDULE) {
           compare_to_units = compare_player.getUnits();
           units = player.getUnits();
           Collisions.compareUnits(units, compare_to_units);
@@ -48,17 +50,17 @@ Handle collisions and conflicts between units.
     };
 
     Collisions.compareUnits = function(units, compare_to_units) {
-      var compare_unit, inner_unit_checked, outer_unit_checked, unit, _i, _len, _ref, _results;
+      var compare_unit, inner_checked, outer_checked, unit, _i, _len, _ref, _results;
       _ref = units.getAll();
       _results = [];
-      for (outer_unit_checked = _i = 0, _len = _ref.length; _i < _len; outer_unit_checked = ++_i) {
-        unit = _ref[outer_unit_checked];
+      for (outer_checked = _i = 0, _len = _ref.length; _i < _len; outer_checked = ++_i) {
+        unit = _ref[outer_checked];
         _results.push((function() {
           var _j, _len1, _ref1, _results1;
           _ref1 = compare_to_units.getAll();
           _results1 = [];
-          for (inner_unit_checked = _j = 0, _len1 = _ref1.length; _j < _len1; inner_unit_checked = ++_j) {
-            compare_unit = _ref1[inner_unit_checked];
+          for (inner_checked = _j = 0, _len1 = _ref1.length; _j < _len1; inner_checked = ++_j) {
+            compare_unit = _ref1[inner_checked];
             if (unit.getPosition().distanceFrom(compare_unit.getPosition()) < Collisions.UNIT_COLLISION_SENSITIVITY) {
               units.remove(unit);
               compare_to_units.remove(compare_unit);

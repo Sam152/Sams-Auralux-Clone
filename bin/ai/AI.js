@@ -11,7 +11,7 @@ Some behaviour for the player to play against.
       this.other_players = other_players;
       this.neutral_player = neutral_player;
       this.defence = 20;
-      this.attack = 100;
+      this.attack = 50;
       this.expand = 20;
       this.updateGeneralStats();
       this.updatePlanetStats();
@@ -20,7 +20,9 @@ Some behaviour for the player to play against.
     }
 
     AI.prototype.tick = function() {
-      Schedule.runEvery(80, function() {
+      var favour_expansion;
+      favour_expansion = this.stats.NEUTRAL_PLANETS_LEFT > this.stats.MY_PLANETS;
+      Schedule.runEvery(10, function() {
         return this.updateGeneralStats();
       }, this);
       Schedule.runEvery(30, function() {
@@ -30,6 +32,9 @@ Some behaviour for the player to play against.
         return this.makeExpansionMove();
       }, this);
       return Schedule.runEvery(this.attack, function() {
+        if (favour_expansion && Random.integer(0, 3) !== 0) {
+          return;
+        }
         return this.makeAttackMove();
       }, this);
     };
@@ -54,7 +59,8 @@ Some behaviour for the player to play against.
 
     AI.prototype.updateGeneralStats = function() {
       return this.stats = {
-        TOTAL_UNITS: 0
+        NEUTRAL_PLANETS_LEFT: this.neutral_player.getPlanets().length,
+        MY_PLANETS: this.player.getPlanets().length
       };
     };
 
@@ -141,6 +147,9 @@ Some behaviour for the player to play against.
         planet = _ref[_i];
         victim = planet.nearest_occupied;
         if (false === victim.planet) {
+          continue;
+        }
+        if (Random.integer(0, this.planets.length) === 0) {
           continue;
         }
         total_defence = this.getNearbyUnits(victim.planet, victim.player).count();

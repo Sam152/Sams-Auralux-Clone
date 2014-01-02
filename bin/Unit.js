@@ -25,6 +25,10 @@
       return this.drawUnit();
     };
 
+    Unit.prototype.getId = function() {
+      return this.id;
+    };
+
     Unit.prototype.setActive = function(status) {
       return this.active = status;
     };

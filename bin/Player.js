@@ -6,7 +6,7 @@ A player who has control over planets and units.
 
 (function() {
   window.Player = (function() {
-    Player.UNIT_GENERATION_SPEED = 1;
+    Player.UNIT_GENERATION_SPEED = 3;
 
     function Player(color) {
       this.color = color;

@@ -7,7 +7,7 @@ class window.AI
 
 		# Some stats related to how often our AI should do certain things.
 		@defence = 20
-		@attack = 100
+		@attack = 50
 		@expand = 20
 
 		# Get some general stats about the player to use.
@@ -26,7 +26,10 @@ class window.AI
 
 	tick: ->
 
-		Schedule.runEvery(80, ->
+		# Should we be expanding more than we should be attacking?
+		favour_expansion = @stats.NEUTRAL_PLANETS_LEFT > @stats.MY_PLANETS
+
+		Schedule.runEvery(10, ->
 			@updateGeneralStats()
 		,@)
 
@@ -39,6 +42,9 @@ class window.AI
 		,@)
 
 		Schedule.runEvery(@attack, ->
+			# Favor expansion in the early days of the game.
+			if favour_expansion && Random.integer(0, 3) != 0
+				return
 			@makeAttackMove()
 		,@)
 
@@ -57,7 +63,8 @@ class window.AI
 	# Calculate general stats about this players situation.
 	updateGeneralStats: () ->
 		@stats = {
-			TOTAL_UNITS : 0,
+			NEUTRAL_PLANETS_LEFT : @neutral_player.getPlanets().length,
+			MY_PLANETS : @player.getPlanets().length,
 		}
 
 	# Get the nearest planet to another planet.
@@ -140,9 +147,14 @@ class window.AI
 	# Attack nearby players when we are capeable.
 	makeAttackMove: ->
 		for planet in @planets
+
 			victim = planet.nearest_occupied
 
 			if false == victim.planet
+				continue
+
+			# Try to stop all the planets from attacking at exactly the same time.
+			if (Random.integer(0, @planets.length) == 0)
 				continue
 
 			total_defence = @getNearbyUnits(victim.planet, victim.player).count()

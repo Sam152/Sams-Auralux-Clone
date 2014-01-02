@@ -46,6 +46,7 @@ class window.Position
 	distanceFrom: (position) ->
 		self = @
 		return ((m) ->
+			"use asm";
 			return m.sqrt(m.pow(self.x - position.getX(), 2) + m.pow(self.y - position.getY(), 2))
 		)(Math)
 
