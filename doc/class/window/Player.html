@@ -48,7 +48,7 @@
     =
   </dt>
   <dd>
-    <pre><code class='coffeescript'>10</code></pre>
+    <pre><code class='coffeescript'>1</code></pre>
     <div class='docstring'>
   <p>How fast should units spawn.</p>
 </div>
@@ -113,6 +113,41 @@
       </a>
     </span>
     <span class='desc'>
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#getColor-dynamic'>
+        #
+(void)
+<b>getColor</b><span>()</span>
+      </a>
+    </span>
+    <span class='desc'>
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#removePlanetOwnership-dynamic'>
+        #
+(void)
+<b>removePlanetOwnership</b><span>(planet)</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Tell this player that a planet no longer belongs to them. 
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#addPlanetOwnership-dynamic'>
+        #
+(void)
+<b>addPlanetOwnership</b><span>(planet)</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Bring a new planet into the circle of trust. 
     </span>
   </li>
 </ul>
@@ -183,10 +218,47 @@
     </p>
     
   </div>
+  <div class='method_details'>
+    <p class='signature' id='getColor-dynamic'>
+      #
+(void)
+<b>getColor</b><span>()</span>
+      <br>
+    </p>
+    
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='removePlanetOwnership-dynamic'>
+      #
+(void)
+<b>removePlanetOwnership</b><span>(planet)</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Tell this player that a planet no longer belongs to them.</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='addPlanetOwnership-dynamic'>
+      #
+(void)
+<b>addPlanetOwnership</b><span>(planet)</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Bring a new planet into the circle of trust. Pay special attention to what
+happens in the constructor of Planet, because this function needs to
+replicate a lot of the player specific setup logic.</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
 </div>
     </div>
     <div id='footer'>
-  December 30, 13 22:18:18 by
+  January 02, 14 15:14:12 by
   <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
     Codo
   </a>

@@ -32,7 +32,7 @@
       <table class='box'>
         <tr>
           <td>Defined in:</td>
-          <td>src&#47;AI.coffee</td>
+          <td>src&#47;ai&#47;AI.coffee</td>
         </tr>
       </table>
       <h2>Overview</h2>
@@ -54,6 +54,89 @@
     <span class='desc'>
     </span>
   </li>
+  <li>
+    <span class='signature'>
+      <a href='#updatePlanetStats-dynamic'>
+        #
+(void)
+<b>updatePlanetStats</b><span>()</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Keep all of the planet statistics up to date. 
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#updateGeneralStats-dynamic'>
+        #
+(void)
+<b>updateGeneralStats</b><span>()</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Calculate general stats about this players situation. 
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#getNearestPlanet-dynamic'>
+        #
+(void)
+<b>getNearestPlanet</b><span>(planet, type)</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Get the nearest planet to another planet. 
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#getNearbyUnits-dynamic'>
+        #
+(void)
+<b>getNearbyUnits</b><span>(planet, player)</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Get units close to a planet, belonging to a player. 
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#makeExpansionMove-dynamic'>
+        #
+(void)
+<b>makeExpansionMove</b><span>()</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Expand into other areas of the map. 
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#makeAttackMove-dynamic'>
+        #
+(void)
+<b>makeAttackMove</b><span>()</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Attack nearby players when we are capeable. 
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#makeDefenceMove-dynamic'>
+        #
+(void)
+<b>makeDefenceMove</b><span>()</span>
+      </a>
+    </span>
+    <span class='desc'>
+    </span>
+  </li>
 </ul>
       <h2>Constructor Details</h2>
       <div class='methods'>
@@ -61,7 +144,7 @@
     <p class='signature' id='constructor-dynamic'>
       #
 (void)
-<b>constructor</b><span>(player)</span>
+<b>constructor</b><span>(player, other_players, neutral_player)</span>
       <br>
     </p>
     
@@ -78,10 +161,101 @@
     </p>
     
   </div>
+  <div class='method_details'>
+    <p class='signature' id='updatePlanetStats-dynamic'>
+      #
+(void)
+<b>updatePlanetStats</b><span>()</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Keep all of the planet statistics up to date.</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='updateGeneralStats-dynamic'>
+      #
+(void)
+<b>updateGeneralStats</b><span>()</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Calculate general stats about this players situation.</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='getNearestPlanet-dynamic'>
+      #
+(void)
+<b>getNearestPlanet</b><span>(planet, type)</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Get the nearest planet to another planet.
+occupied = 1
+unoccupied = 2
+own = 3
+@todo, look at breaking this into a few more useful methods.</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='getNearbyUnits-dynamic'>
+      #
+(void)
+<b>getNearbyUnits</b><span>(planet, player)</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Get units close to a planet, belonging to a player.</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='makeExpansionMove-dynamic'>
+      #
+(void)
+<b>makeExpansionMove</b><span>()</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Expand into other areas of the map.</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='makeAttackMove-dynamic'>
+      #
+(void)
+<b>makeAttackMove</b><span>()</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Attack nearby players when we are capeable.</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='makeDefenceMove-dynamic'>
+      #
+(void)
+<b>makeDefenceMove</b><span>()</span>
+      <br>
+    </p>
+    
+  </div>
 </div>
     </div>
     <div id='footer'>
-  December 30, 13 22:18:18 by
+  January 02, 14 15:14:13 by
   <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
     Codo
   </a>
