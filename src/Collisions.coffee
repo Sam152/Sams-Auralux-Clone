@@ -1,5 +1,7 @@
 ###
 Handle collisions and conflicts between units.
+Look at this for optimisation:
+http://goanna.cs.rmit.edu.au/~gl/teaching/rtr&3dgp/notes/data-structures.pdf
 ###
 class window.Collisions
 
