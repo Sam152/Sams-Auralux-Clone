@@ -1,32 +1,34 @@
 ###
 Refactor this whole thing into a class and stop using statics.
+http://cg.informatik.uni-freiburg.de/course_notes/sim_08_sp.pdf
 ###
 class window.CollisionsGrid extends Collisions
 
-	@spacial_grid_items = []
-	@grid_size: 16
+	# Compare a set of units using a UniformGrid.
+	@compareUnits: (units, compare_units, player, compare_player) ->
 
-	@reset: ->
-		@grid = {}
+		@grid_size = 100
 
-	@insertUnitGroup: (units) ->
-		for unit in units
-			CollisionsGrid.insertIntoGrid(unit)
+		grid = new UniformGrid(@grid_size)
+		compare_grid = new UniformGrid(@grid_size)
 
-	# Inset a bunch of units into a grid.
-	@insertIntoGrid: (unit) ->
-		position = unit.getPosition()
-		cell = Math.floor(position.getX() / @grid_size) + 'x' + Math.floor(position.getY() / @grid_size)
-		@grid[cell] = @grid[cell] || []
-		@grid[cell].push(unit)
-			
-	# Check the grid for matching units.
-	@checkGrid: ->
-		for cell of @grid
-			for unit in cell
-				# Find the balance of which units belong to who. If 10 belong to 
-				# A and 5 to B, player A should be left with 5 and B 0.
-				# Maybe just keep the ownership balance in another grid?
+		# Create and populate a grid for our own units.
+		for unit in units.getAll()
+			grid.add(unit.getPosition(), unit)
 
-	addItem: (@unit) ->
-		position = @unit.getPosition()
+		# Create and populate a grid for our opponents units.
+		for unit in compare_units.getAll()
+			compare_grid.add(unit.getPosition(), unit)
+
+		# Loop over our grid.
+		for key, cell of grid.getItems()
+			# And get the opponents corresponding cell.
+			opponent_cell = compare_grid.getCell(key)
+			if opponent_cell == false
+				continue
+
+			kill_units = Math.min(opponent_cell.length, cell.length)
+
+			for i in [0..kill_units-1]
+				units.remove(cell[i])
+				compare_units.remove(opponent_cell[i])

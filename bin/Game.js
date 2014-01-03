@@ -39,7 +39,7 @@ The primary class for our overarching logic.
       _.invoke(this.players, 'tick');
       _.invoke(this.ai, 'tick');
       this.cursor.tick();
-      Collisions.resolveCollisions(this.combat_players);
+      CollisionsGrid.resolveCollisions(this.combat_players);
       return Ownership.checkPlanetOwnership(this.players, this.neutral_player);
     };
 

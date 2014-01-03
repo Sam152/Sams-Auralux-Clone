@@ -10,7 +10,7 @@ Manage who owns what.
 
     Ownership.OWNERSHIP_CHECK_FREQUENCY = 20;
 
-    Ownership.UNIT_COVERAGE_REQUIREMENT = 30;
+    Ownership.UNIT_COVERAGE_REQUIREMENT = 60;
 
     Ownership.checkPlanetOwnership = function(players, neutral_player) {
       return Schedule.runEvery(Ownership.OWNERSHIP_CHECK_FREQUENCY, function() {

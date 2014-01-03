@@ -38,20 +38,21 @@ http://goanna.cs.rmit.edu.au/~gl/teaching/rtr&3dgp/notes/data-structures.pdf
     };
 
     Collisions.resolveCollisions = function(combat_players) {
-      var matchup_number;
+      var matchup_number, self;
       matchup_number = 0;
-      return Collisions.playerMatchup(combat_players, function(player, compare_player) {
+      self = this;
+      return this.playerMatchup(combat_players, function(player, compare_player) {
         var compare_to_units, units;
         if (ticks % Collisions.PLAYER_COLLISION_CHECKING_SCHEDULE === matchup_number || matchup_number > Collisions.PLAYER_COLLISION_CHECKING_SCHEDULE) {
           compare_to_units = compare_player.getUnits();
           units = player.getUnits();
-          Collisions.compareUnits(units, compare_to_units);
+          self.compareUnits(units, compare_to_units, player, compare_player);
         }
         return matchup_number++;
       }, this);
     };
 
-    Collisions.compareUnits = function(units, compare_to_units) {
+    Collisions.compareUnits = function(units, compare_to_units, player, compare_player) {
       var compare_unit, inner_checked, outer_checked, unit, _i, _len, _ref, _results;
       _ref = units.getAll();
       _results = [];
@@ -63,7 +64,7 @@ http://goanna.cs.rmit.edu.au/~gl/teaching/rtr&3dgp/notes/data-structures.pdf
           _results1 = [];
           for (inner_checked = _j = 0, _len1 = _ref1.length; _j < _len1; inner_checked = ++_j) {
             compare_unit = _ref1[inner_checked];
-            if (unit.getPosition().distanceFrom(compare_unit.getPosition()) < Collisions.UNIT_COLLISION_SENSITIVITY) {
+            if (this.unitsIntersecting(unit, compare_unit)) {
               units.remove(unit);
               compare_to_units.remove(compare_unit);
               break;
@@ -72,9 +73,13 @@ http://goanna.cs.rmit.edu.au/~gl/teaching/rtr&3dgp/notes/data-structures.pdf
             }
           }
           return _results1;
-        })());
+        }).call(this));
       }
       return _results;
+    };
+
+    Collisions.unitsIntersecting = function(unit, compare_unit) {
+      return unit.getPosition().distanceFrom(compare_unit.getPosition()) < Collisions.UNIT_COLLISION_SENSITIVITY;
     };
 
     return Collisions;

@@ -43,7 +43,7 @@ class window.Game
 		@cursor.tick()
 
 		# Do the primary game related logic.
-		Collisions.resolveCollisions(@combat_players)
+		CollisionsGrid.resolveCollisions(@combat_players)
 		Ownership.checkPlanetOwnership(@players, @neutral_player)
 
 

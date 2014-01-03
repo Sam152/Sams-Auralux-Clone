@@ -34,7 +34,8 @@ class window.Collisions
 	# Resolve colliding units between an array of players.
 	@resolveCollisions: (combat_players) ->
 		matchup_number = 0
-		Collisions.playerMatchup(combat_players, (player, compare_player) ->
+		self = @
+		@.playerMatchup(combat_players, (player, compare_player) ->
 			# Instead of using Schedule, we can stagger the collision
 			# detection per player matchup in order to put less stress on
 			# a specific tick.
@@ -43,21 +44,21 @@ class window.Collisions
 				compare_to_units = compare_player.getUnits()
 				units = player.getUnits()
 				# Check the units of the two players we have elected to compare.
-				Collisions.compareUnits(units, compare_to_units)
+				self.compareUnits(units, compare_to_units, player, compare_player)
 
 			matchup_number++
 		, @)
 
 
 	# Compare the units provided by two players.
-	@compareUnits: (units, compare_to_units) ->
+	@compareUnits: (units, compare_to_units, player, compare_player) ->
 
 		# Compare each units position with each other unit.
 		for unit, outer_checked in units.getAll()
 			for compare_unit, inner_checked in compare_to_units.getAll()
 
 				# When we consider there a collision between some units.
-				if unit.getPosition().distanceFrom(compare_unit.getPosition()) < Collisions.UNIT_COLLISION_SENSITIVITY
+				if @.unitsIntersecting(unit, compare_unit)
 
 					# Wipe them off the face of the earth.
 					units.remove(unit)
@@ -66,3 +67,7 @@ class window.Collisions
 					# We need to break two loops to stop a single unit
 					# from wiping out multiple other units.
 					break
+
+	# Check if one unit has collided with another.
+	@unitsIntersecting: (unit, compare_unit) ->
+		return unit.getPosition().distanceFrom(compare_unit.getPosition()) < Collisions.UNIT_COLLISION_SENSITIVITY
