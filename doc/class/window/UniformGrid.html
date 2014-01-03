@@ -21,70 +21,92 @@
     &raquo;
     <span class='title'>window</span>
     &raquo;
-    <span class='title'>Circle</span>
+    <span class='title'>UniformGrid</span>
   </div>
 </div>
     <div id='content'>
       <h1>
         Class:
-        window.Circle
+        window.UniformGrid
       </h1>
       <table class='box'>
         <tr>
           <td>Defined in:</td>
-          <td>src&#47;Circle.coffee</td>
-        </tr>
-        <tr>
-          <td>Inherits:</td>
-          <td>
-            Position
-          </td>
+          <td>src&#47;UniformGrid.coffee</td>
         </tr>
       </table>
       <h2>Instance Method Summary</h2>
       <ul class='summary'>
   <li>
     <span class='signature'>
-      <a href='#renderWireframe-dynamic'>
+      <a href='#add-dynamic'>
         #
 (void)
-<b>renderWireframe</b><span>()</span>
+<b>add</b><span>(circle, item)</span>
       </a>
     </span>
     <span class='desc'>
+      Add an item to the spacial grid given a position. 
     </span>
   </li>
   <li>
     <span class='signature'>
-      <a href='#intersectsWith-dynamic'>
+      <a href='#addToCell-dynamic'>
         #
 (void)
-<b>intersectsWith</b><span>(circle)</span>
+<b>addToCell</b><span>(cell, item)</span>
       </a>
     </span>
     <span class='desc'>
+      Add an item to a cell in the grid. 
     </span>
   </li>
   <li>
     <span class='signature'>
-      <a href='#getR-dynamic'>
+      <a href='#getCell-dynamic'>
         #
 (void)
-<b>getR</b><span>()</span>
+<b>getCell</b><span>(cell)</span>
       </a>
     </span>
     <span class='desc'>
+      Get the value out of a cell. 
     </span>
   </li>
   <li>
     <span class='signature'>
-      <a href='#setR-dynamic'>
+      <a href='#getKey-dynamic'>
         #
 (void)
-<b>setR</b><span>(r)</span>
+<b>getKey</b><span>(x, y)</span>
       </a>
     </span>
     <span class='desc'>
+      Get a cell name based on a position. 
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#reset-dynamic'>
+        #
+(void)
+<b>reset</b><span>()</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Reset the grid back to nothing. 
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#getItems-dynamic'>
+        #
+(void)
+<b>getItems</b><span>()</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Get all the items in a grid. 
     </span>
   </li>
 </ul>
@@ -94,49 +116,96 @@
     <p class='signature' id='constructor-dynamic'>
       #
 (void)
-<b>constructor</b><span>(x, y, r)</span>
+<b>constructor</b><span>(size)</span>
       <br>
     </p>
-    
+    <div class='docstring'>
+  <p>Create a grid of a given size.</p>
+</div>
+<div class='tags'>
+</div>
   </div>
 </div>
       <h2>Instance Method Details</h2>
       <div class='methods'>
   <div class='method_details'>
-    <p class='signature' id='renderWireframe-dynamic'>
+    <p class='signature' id='add-dynamic'>
       #
 (void)
-<b>renderWireframe</b><span>()</span>
+<b>add</b><span>(circle, item)</span>
       <br>
     </p>
-    
+    <div class='docstring'>
+  <p>Add an item to the spacial grid given a position. This assumes the cells
+are an array and are not being managed with setCell and getCell.</p>
+</div>
+<div class='tags'>
+</div>
   </div>
   <div class='method_details'>
-    <p class='signature' id='intersectsWith-dynamic'>
+    <p class='signature' id='addToCell-dynamic'>
       #
 (void)
-<b>intersectsWith</b><span>(circle)</span>
+<b>addToCell</b><span>(cell, item)</span>
       <br>
     </p>
-    
+    <div class='docstring'>
+  <p>Add an item to a cell in the grid.</p>
+</div>
+<div class='tags'>
+</div>
   </div>
   <div class='method_details'>
-    <p class='signature' id='getR-dynamic'>
+    <p class='signature' id='getCell-dynamic'>
       #
 (void)
-<b>getR</b><span>()</span>
+<b>getCell</b><span>(cell)</span>
       <br>
     </p>
-    
+    <div class='docstring'>
+  <p>Get the value out of a cell.</p>
+</div>
+<div class='tags'>
+</div>
   </div>
   <div class='method_details'>
-    <p class='signature' id='setR-dynamic'>
+    <p class='signature' id='getKey-dynamic'>
       #
 (void)
-<b>setR</b><span>(r)</span>
+<b>getKey</b><span>(x, y)</span>
       <br>
     </p>
-    
+    <div class='docstring'>
+  <p>Get a cell name based on a position.</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='reset-dynamic'>
+      #
+(void)
+<b>reset</b><span>()</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Reset the grid back to nothing.</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='getItems-dynamic'>
+      #
+(void)
+<b>getItems</b><span>()</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Get all the items in a grid.</p>
+</div>
+<div class='tags'>
+</div>
   </div>
 </div>
     </div>

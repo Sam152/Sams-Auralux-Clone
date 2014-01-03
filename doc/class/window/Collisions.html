@@ -37,20 +37,36 @@
       </table>
       <h2>Overview</h2>
       <div class='docstring'>
-  <p>Handle collisions and conflicts between units.</p>
+  <p>Handle collisions and conflicts between units.
+Look at this for optimisation:
+<a href="http://goanna.cs.rmit.edu.au/~gl/teaching/rtr&amp;3dgp/notes/data-structures.pdf">http://goanna.cs.rmit.edu.au/~gl/teaching/rtr&amp;3dgp/notes/data-structures.pdf</a></p>
 </div>
 <div class='tags'>
 </div>
       <h2>Variables Summary</h2>
       <dl class='constants'>
-  <dt id='COLLISION_CHECKING_SCHEDULE-variable'>
-    COLLISION_CHECKING_SCHEDULE
+  <dt id='PLAYER_COLLISION_CHECKING_SCHEDULE-variable'>
+    PLAYER_COLLISION_CHECKING_SCHEDULE
     =
   </dt>
   <dd>
     <pre><code class='coffeescript'>6</code></pre>
     <div class='docstring'>
-  <p>How often (based on ticks) collisions should be checked/</p>
+  <p>How often (based on ticks) collisions should be checked for player
+matchups. This could be replaced with something that works out the
+combinations of players because ultimately that is the optimal number.</p>
+</div>
+<div class='tags'>
+</div>
+  </dd>
+  <dt id='UNIT_COLLISION_CHECKING_SCHEDULE-variable'>
+    UNIT_COLLISION_CHECKING_SCHEDULE
+    =
+  </dt>
+  <dd>
+    <pre><code class='coffeescript'>5</code></pre>
+    <div class='docstring'>
+  <p>How many ticks to split unit checking into.</p>
 </div>
 <div class='tags'>
 </div>
@@ -102,11 +118,23 @@ units colliding easily.</p>
       <a href='#compareUnits-static'>
         .
 (void)
-<b>compareUnits</b><span>(units, compare_to_units)</span>
+<b>compareUnits</b><span>(units, compare_to_units, player, compare_player)</span>
       </a>
     </span>
     <span class='desc'>
       Compare the units provided by two players. 
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#unitsIntersecting-static'>
+        .
+(void)
+<b>unitsIntersecting</b><span>(unit, compare_unit)</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Check if one unit has collided with another. 
     </span>
   </li>
 </ul>
@@ -144,7 +172,7 @@ may need a better place to live.</p>
     <p class='signature' id='compareUnits-static'>
       .
 (void)
-<b>compareUnits</b><span>(units, compare_to_units)</span>
+<b>compareUnits</b><span>(units, compare_to_units, player, compare_player)</span>
       <br>
     </p>
     <div class='docstring'>
@@ -153,10 +181,23 @@ may need a better place to live.</p>
 <div class='tags'>
 </div>
   </div>
+  <div class='method_details'>
+    <p class='signature' id='unitsIntersecting-static'>
+      .
+(void)
+<b>unitsIntersecting</b><span>(unit, compare_unit)</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Check if one unit has collided with another.</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
 </div>
     </div>
     <div id='footer'>
-  January 02, 14 15:14:12 by
+  January 03, 14 18:56:36 by
   <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
     Codo
   </a>
