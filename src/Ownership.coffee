@@ -7,7 +7,7 @@ class window.Ownership
 	@OWNERSHIP_CHECK_FREQUENCY: 20
 
 	# How many units need to be covering a planet to take it over.
-	@UNIT_COVERAGE_REQUIREMENT: 60
+	@UNIT_COVERAGE_REQUIREMENT: 30
 
 	# Check if any planets need to transfer ownership.
 	@checkPlanetOwnership: (players, neutral_player) ->
@@ -24,9 +24,6 @@ class window.Ownership
 
 					# Get the units we will be testing.
 					opponents_units = compare_player.getUnits()
-
-					if player.color.hex == Game.PLAYER_COLORS.BLUE
-						console.log('Checking human planets against '  + compare_player.color.hex)
 
 					# Test each planet of the player we are testing.
 					for planet in player.getPlanets()

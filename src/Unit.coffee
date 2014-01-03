@@ -1,6 +1,6 @@
 class window.Unit
 
-	@UNIT_SPEED: 7
+	@UNIT_SPEED: 4
 	@UNIT_WIDTH: 5
 
 	# A global counter for units, so that every unit may have a uid. This

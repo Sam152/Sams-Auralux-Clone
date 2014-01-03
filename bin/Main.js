@@ -12,6 +12,7 @@ The entry point for our game.
       var game, menu, state, state_controls, states, ticker;
       window.context = new Context(canvas);
       window.ticks = 0;
+      this.frame_rate = 20;
       menu = new Menu();
       game = new RandomGame();
       states = {
@@ -37,7 +38,7 @@ The entry point for our game.
           state.execute();
           return window.ticks++;
         },
-        ticks_per_second: 25
+        ticks_per_second: this.frame_rate
       }).start();
     };
 

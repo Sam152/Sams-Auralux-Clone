@@ -8,10 +8,10 @@ class window.Planet
 	@MAX_PLANET_RADIUS: 40
 
 	# The distance a unit falls from the planet.
-	@UNIT_DISTANCE_FROM_PLANET: 25
+	@UNIT_DISTANCE_FROM_PLANET: 15
 
 	# The variance of how far a unit falls from a planet
-	@UNIT_DISTANCE_FROM_PLANET_VARIANCE: 10
+	@UNIT_DISTANCE_FROM_PLANET_VARIANCE: 5
 
 	constructor: (x, y, size, @color) ->
 		@position = new Circle(x, y, size)

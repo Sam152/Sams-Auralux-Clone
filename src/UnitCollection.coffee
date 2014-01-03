@@ -7,7 +7,7 @@ Specific commands could be overriden by parent elements.
 ###
 class window.UnitCollection
 
-	@SEND_TO_SPREAD_AMOUNT: 20
+	@SEND_TO_SPREAD_AMOUNT: 10
 
 	constructor: ->
 		@units = {}

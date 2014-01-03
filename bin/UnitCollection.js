@@ -10,7 +10,7 @@ Specific commands could be overriden by parent elements.
 
 (function() {
   window.UnitCollection = (function() {
-    UnitCollection.SEND_TO_SPREAD_AMOUNT = 20;
+    UnitCollection.SEND_TO_SPREAD_AMOUNT = 10;
 
     function UnitCollection() {
       this.units = {};

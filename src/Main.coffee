@@ -6,6 +6,8 @@ class window.Main
 
 		window.context = new Context(canvas);
 		window.ticks = 0
+
+		@frame_rate = 20
 		
 		menu = new Menu()
 
@@ -36,6 +38,6 @@ class window.Main
 				context.clearScreen()
 				state.execute()
 				window.ticks++
-			ticks_per_second : 25
+			ticks_per_second : @frame_rate
 		}).start()
 		

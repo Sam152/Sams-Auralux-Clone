@@ -10,7 +10,7 @@ Manage who owns what.
 
     Ownership.OWNERSHIP_CHECK_FREQUENCY = 20;
 
-    Ownership.UNIT_COVERAGE_REQUIREMENT = 60;
+    Ownership.UNIT_COVERAGE_REQUIREMENT = 30;
 
     Ownership.checkPlanetOwnership = function(players, neutral_player) {
       return Schedule.runEvery(Ownership.OWNERSHIP_CHECK_FREQUENCY, function() {
@@ -27,9 +27,6 @@ Manage who owns what.
                 continue;
               }
               opponents_units = compare_player.getUnits();
-              if (player.color.hex === Game.PLAYER_COLORS.BLUE) {
-                console.log('Checking human planets against ' + compare_player.color.hex);
-              }
               _results1.push((function() {
                 var _k, _len2, _ref, _results2;
                 _ref = player.getPlanets();

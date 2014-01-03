@@ -7,6 +7,8 @@ class window.CollisionsGrid extends Collisions
 	# Compare a set of units using a UniformGrid.
 	@compareUnits: (units, compare_units, player, compare_player) ->
 
+		# The grid does need to be somewhat large as we are currently dealing
+		# with single points and squares when defining a collision.
 		@grid_size = 100
 
 		grid = new UniformGrid(@grid_size)

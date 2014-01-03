@@ -10,9 +10,9 @@ A planet that produces units.
 
     Planet.MAX_PLANET_RADIUS = 40;
 
-    Planet.UNIT_DISTANCE_FROM_PLANET = 25;
+    Planet.UNIT_DISTANCE_FROM_PLANET = 15;
 
-    Planet.UNIT_DISTANCE_FROM_PLANET_VARIANCE = 10;
+    Planet.UNIT_DISTANCE_FROM_PLANET_VARIANCE = 5;
 
     function Planet(x, y, size, color) {
       this.color = color;
