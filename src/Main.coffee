@@ -7,7 +7,7 @@ class window.Main
 		window.context = new Context(canvas);
 		window.ticks = 0
 
-		@frame_rate = 20
+		@frame_rate = 30
 		
 		menu = new Menu()
 
