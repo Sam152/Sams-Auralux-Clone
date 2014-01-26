@@ -22,7 +22,7 @@ class window.AI
 		# How many additional units should we send to defend a planet takeover.
 		# This buffer is handy because a planet produces units while we are in
 		# transit.
-		@attack_unit_buffer = 10
+		@attack_unit_buffer = 100
 
 	tick: ->
 

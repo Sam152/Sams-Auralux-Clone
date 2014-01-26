@@ -7,13 +7,13 @@ class window.Main
 		window.context = new Context(canvas);
 		window.ticks = 0
 
-		@frame_rate = 60
+		@frame_rate = 30
 		
 		menu = new Menu()
 
 		# @todo, Instead of creating a game directly, we could move to a game selection
 		# screen instead here.
-		game = new RandomGame()
+		game = new CircleGame()
 		
 		# The high level state of the game and the functions that execute them.
 		# todo, consider using coffee-machine or another smarter way of handling

@@ -16,7 +16,7 @@ Some behaviour for the player to play against.
       this.updateGeneralStats();
       this.updatePlanetStats();
       this.expansion_unit_buffer = 5;
-      this.attack_unit_buffer = 10;
+      this.attack_unit_buffer = 100;
     }
 
     AI.prototype.tick = function() {

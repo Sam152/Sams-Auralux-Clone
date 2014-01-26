@@ -5,13 +5,13 @@ class window.Planet
 
 	# The bounds for how big a randomly generated planet can be.
 	@MIN_PLANET_RADIUS: 20
-	@MAX_PLANET_RADIUS: 40
+	@MAX_PLANET_RADIUS: 20
 
 	# The distance a unit falls from the planet.
 	@UNIT_DISTANCE_FROM_PLANET: 15
 
 	# The variance of how far a unit falls from a planet
-	@UNIT_DISTANCE_FROM_PLANET_VARIANCE: 5
+	@UNIT_DISTANCE_FROM_PLANET_VARIANCE: 0
 
 	constructor: (x, y, size, @color) ->
 		@position = new Circle(x, y, size)

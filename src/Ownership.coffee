@@ -7,7 +7,7 @@ class window.Ownership
 	@OWNERSHIP_CHECK_FREQUENCY: 20
 
 	# How many units need to be covering a planet to take it over.
-	@UNIT_COVERAGE_REQUIREMENT: 30
+	@UNIT_COVERAGE_REQUIREMENT: 100
 
 	# Check if any planets need to transfer ownership.
 	@checkPlanetOwnership: (players, neutral_player) ->

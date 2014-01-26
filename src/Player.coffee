@@ -19,12 +19,20 @@ class window.Player
 		edge_buffer = Planet.MAX_PLANET_RADIUS + Planet.UNIT_DISTANCE_FROM_PLANET + Planet.UNIT_DISTANCE_FROM_PLANET_VARIANCE
 
 		for i in [0..number]
-			@planets.push(new Planet(
+			@createPlanet(
 				Random.integer(edge_buffer, window.innerWidth - edge_buffer),
 				Random.integer(edge_buffer, window.innerHeight - edge_buffer),
 				Random.integer(Planet.MIN_PLANET_RADIUS, Planet.MAX_PLANET_RADIUS),
+			)
+
+	# Create a planet for this player.
+	createPlanet: (x, y, r) ->
+		@planets.push(new Planet(
+				x,
+				y,
+				r,
 				@color
-			))
+		))		
 
 	tick: ->
 		# Ensure our planets and units are ticked.
@@ -39,7 +47,6 @@ class window.Player
 	generatePlanetUnits: ->
 		if ticks % Player.UNIT_GENERATION_SPEED != 0
 			return
-
 		for planet in @planets
 			@units.add(planet.spawnUnit())
 

@@ -8,11 +8,11 @@ A planet that produces units.
   window.Planet = (function() {
     Planet.MIN_PLANET_RADIUS = 20;
 
-    Planet.MAX_PLANET_RADIUS = 40;
+    Planet.MAX_PLANET_RADIUS = 20;
 
     Planet.UNIT_DISTANCE_FROM_PLANET = 15;
 
-    Planet.UNIT_DISTANCE_FROM_PLANET_VARIANCE = 5;
+    Planet.UNIT_DISTANCE_FROM_PLANET_VARIANCE = 0;
 
     function Planet(x, y, size, color) {
       this.color = color;
