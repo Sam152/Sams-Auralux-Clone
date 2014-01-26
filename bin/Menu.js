@@ -13,8 +13,7 @@ A simple DOM based menu for start a game and possibly selecting levels.
     Menu.prototype.tick = function(state_controls) {
       this.state_controls = state_controls;
       if (this.menu_exists_in_dom === false) {
-        this.createMenu();
-        return this.startGame();
+        return this.createMenu();
       }
     };
 

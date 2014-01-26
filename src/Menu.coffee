@@ -12,7 +12,7 @@ class window.Menu
 		if @menu_exists_in_dom == false
 			@createMenu()
 			# Remove this to enable the menu
-			@startGame()
+			# @startGame()
 
 	createMenu: ->
 		self = @
