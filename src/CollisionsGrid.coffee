@@ -9,7 +9,7 @@ class window.CollisionsGrid extends Collisions
 
 		# The grid does need to be somewhat large as we are currently dealing
 		# with single points and squares when defining a collision.
-		@grid_size = 100
+		@grid_size = 10
 
 		grid = new UniformGrid(@grid_size)
 		compare_grid = new UniformGrid(@grid_size)
